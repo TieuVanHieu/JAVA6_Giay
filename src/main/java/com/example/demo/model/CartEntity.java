@@ -31,7 +31,7 @@ public class CartEntity {
 
     @OneToOne
     @JoinColumn(name = "userName")
-    Account account;
+    AccountEntity account;
 
     @JsonIgnore
     @OneToMany(mappedBy = "cart")

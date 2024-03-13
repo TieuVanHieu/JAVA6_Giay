@@ -16,12 +16,12 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "roles")
-public class Role  implements Serializable{
+public class RoleEntity  implements Serializable{
 	@Id
 	private String roleId;
 	private String roleName;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "role")
-	List<Authority> authorities;
+	List<AuthorityEntity> authorities;
 }

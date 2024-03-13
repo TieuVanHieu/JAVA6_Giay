@@ -52,7 +52,7 @@ public class ShippingInfoEntity {
 
     @ManyToOne
     @JoinColumn(name = "userName")
-    Account account;
+    AccountEntity account;
 
 
 }

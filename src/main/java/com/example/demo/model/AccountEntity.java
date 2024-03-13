@@ -24,7 +24,7 @@ import lombok.Data;
 @Data
 @Entity 
 @Table(name = "Accounts")
-public class Account  implements Serializable{
+public class AccountEntity  implements Serializable{
 	@Id
 	@NotBlank(message = "User name không thể để tróng !")
     String userName;
@@ -51,5 +51,5 @@ public class Account  implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
-	List<Authority> authorities;
+	List<AuthorityEntity> authorities;
 }
