@@ -43,9 +43,5 @@ public class Userhome {
 	public String wishlist() {
 		return "user/wishlist";
 	}
-	@RequestMapping("/category-boxed")
-	public String categoryBoxed() {
-		return "user/category-boxed";
-	}
 	
 }

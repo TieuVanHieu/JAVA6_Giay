@@ -1131,8 +1131,8 @@ blockquote {
   text-transform: none; }
   .header-intro-clearance .header-bottom .menu > li > a::before {
     top: 0; }
-.header-intro-clearance .header-bottom .menu.sf-arrows > li > .sf-with-ul::after {
-  right: 1.3rem; }
+/* .header-intro-clearance .header-bottom .menu.sf-arrows > li > .sf-with-ul::after { */
+/*   right: 1.3rem; } */
 .header-intro-clearance .header-bottom .menu > li + li {
   margin-left: .7rem; }
 .header-intro-clearance .header-bottom .header-left {
