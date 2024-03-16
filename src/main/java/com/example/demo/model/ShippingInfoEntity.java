@@ -46,13 +46,15 @@ public class ShippingInfoEntity {
     @Pattern(regexp = "^(0[3|5|7|8|9])+([0-9]{8})", message = "Số điện thoại di động không hợp lệ!")
     String shippingSdt;
 
+    Boolean active = false;
+
     @JsonIgnore
     @OneToMany(mappedBy = "shippingInfo")
     List<OrderEntity> order;
 
     @ManyToOne
     @JoinColumn(name = "userName")
-    Account account;
+    AccountEntity account;
 
 
 }

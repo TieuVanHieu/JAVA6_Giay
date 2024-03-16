@@ -1,0 +1,13 @@
+
+package com.example.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.model.BrandEntity;
+
+/**
+ * BrandEntityDAO
+ */
+public interface BrandEntityDAO extends JpaRepository<BrandEntity, Integer> {
+
+}
