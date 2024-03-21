@@ -14,8 +14,11 @@ import com.example.demo.model.ProductEntity;
  */
 
 public interface ProductService {
+    // List<ProductEntity> findAll();
+    List<ProductEntity> findByCategoryId(Integer id);
+
     // user
-    // Page<ProductEntity> findAll(Pageable pageable);
+     Page<ProductEntity> findAll(Pageable pageable);
 
     // Page<ProductEntity> findAllAndPrice(Double minPrice, Double maxPrice, Pageable pageable);
 

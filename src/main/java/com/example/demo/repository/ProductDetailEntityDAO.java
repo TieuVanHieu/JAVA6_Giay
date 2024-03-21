@@ -10,8 +10,8 @@ import java.util.List;
  */
 public interface ProductDetailEntityDAO extends JpaRepository<ProductDetailEntity, Integer> {
     // // user
-    // // tim productdetail theo productid
-    // List<ProductDetailEntity> findByProductProductId(Integer id);
+    // tim productdetail theo productid
+    List<ProductDetailEntity> findByProductProductId(Integer id);
 
     // // tim productdetail theo colorid và sizeid và productid
     // ProductDetailEntity findByColorColorIdAndSizeSizeIdAndProductProductId(Integer colorId, Integer sizeId,

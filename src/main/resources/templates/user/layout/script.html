@@ -1,16 +1,27 @@
 <div th:fragment="script">
-    <script th:src="@{assets/user/js/jquery.min.js}"></script>
-    <script th:src="@{assets/user/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{assets/user/js/jquery.hoverIntent.min.js}"></script>
-    <script th:src="@{assets/user/js/jquery.waypoints.min.js}"></script>
-    <script th:src="@{assets/user/js/superfish.min.js}"></script>
-    <script th:src="@{assets/user/js/owl.carousel.min.js}"></script>
-    <script th:src="@{assets/user/js/bootstrap-input-spinner.js}"></script>
-    <script th:src="@{assets/user/js/jquery.plugin.min.js}"></script>
-    <script th:src="@{assets/user/js/jquery.magnific-popup.min.js}"></script>
-    <script th:src="@{assets/user/js/jquery.countdown.min.js}"></script>
+    <script>
+        const activePage = window.location.href;
+        const navLink = document.querySelectorAll("nav .menu li a").
+            forEach((link) => {
+                console.log(link);
+                if (link.href === activePage) {
+                    link.parentNode.classList.add("active")
+                }
+            });
+    </script>
+
+    <script th:src="@{../../../assets/user/js/jquery.min.js}"></script>
+    <script th:src="@{../../../assets/user/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{../../../assets/user/js/jquery.hoverIntent.min.js}"></script>
+    <script th:src="@{../../../assets/user/js/jquery.waypoints.min.js}"></script>
+    <script th:src="@{../../../assets/user/js/superfish.min.js}"></script>
+    <script th:src="@{../../../assets/user/js/owl.carousel.min.js}"></script>
+    <script th:src="@{../../../assets/user/js/bootstrap-input-spinner.js}"></script>
+    <script th:src="@{../../../assets/user/js/jquery.plugin.min.js}"></script>
+    <script th:src="@{../../../assets/user/js/jquery.magnific-popup.min.js}"></script>
+    <script th:src="@{../../../assets/user/js/jquery.countdown.min.js}"></script>
     <!-- Main JS File -->
-    <script th:src="@{assets/user/js/main.js}"></script>
-    <script th:src="@{assets/user/js/demos/demo-10.js}"></script>
+    <script th:src="@{../../../assets/user/js/main.js}"></script>
+    <script th:src="@{../../../assets/user/js/demos/demo-10.js}"></script>
 
 </div>

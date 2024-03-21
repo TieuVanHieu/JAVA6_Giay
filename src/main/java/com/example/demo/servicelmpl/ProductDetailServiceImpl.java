@@ -14,13 +14,13 @@ import com.example.demo.service.ProductDetailService;
  */
 @Service
 public class ProductDetailServiceImpl implements ProductDetailService {
-    // @Autowired
-    // ProductDetailEntityDAO detailEntityDAO;
+    @Autowired
+    ProductDetailEntityDAO detailEntityDAO;
 
-    // @Override
-    // public List<ProductDetailEntity> findByProductId(Integer id) {
-    //     return detailEntityDAO.findByProductProductId(id);
-    // }
+    @Override
+    public List<ProductDetailEntity> findByProductId(Integer id) {
+        return detailEntityDAO.findByProductProductId(id);
+    }
 
     // @Override
     // public ProductDetailEntity findByColorColorIdAndSizeSizeIdAndProductProductId(Integer colorId, Integer sizeId,

@@ -17,6 +17,7 @@ import com.example.demo.model.ProductEntity;
 
 public interface ProductEntityDAO extends JpaRepository<ProductEntity, Integer> {
     // // user
+    List<ProductEntity> findByCategoryCategoryId(Integer id);
     // // tìm tất cả sản phẩm
     // Page<ProductEntity> findAll(Pageable pageable);
 

@@ -15,10 +15,10 @@ public class Userhome {
 		return "user/login";
 	}
 
-	@RequestMapping("/product")
-	public String product() {
-		return "user/product";
-	}
+	// @RequestMapping("/product")
+	// public String product() {
+	// 	return "user/product";
+	// }
 
 	@RequestMapping("/cart")
 	public String cart() {
@@ -30,10 +30,10 @@ public class Userhome {
 		return "user/checkout";
 	}
 
-	@RequestMapping("/category")
-	public String category() {
-		return "user/category";
-	}
+	// @RequestMapping("/category")
+	// public String category() {
+	// 	return "user/category";
+	// }
 
 	@RequestMapping("/dashboard")
 	public String dashboard() {

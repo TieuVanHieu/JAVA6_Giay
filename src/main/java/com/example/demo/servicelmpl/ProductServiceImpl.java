@@ -17,13 +17,23 @@ import com.example.demo.service.ProductService;
  */
 @Service
 public class ProductServiceImpl implements ProductService {
-    // @Autowired
-    // ProductEntityDAO productEntityDAO;
+    @Autowired
+    ProductEntityDAO productEntityDAO;
 
     // @Override
-    // public Page<ProductEntity> findAll(Pageable pageable) {
-    //     return productEntityDAO.findAll(pageable);
+    // public List<ProductEntity> findAll() {
+    //     return productEntityDAO.findAll();
     // }
+
+    @Override
+    public List<ProductEntity> findByCategoryId(Integer id) {
+        return productEntityDAO.findByCategoryCategoryId(id);
+    }
+
+    @Override
+    public Page<ProductEntity> findAll(Pageable pageable) {
+        return productEntityDAO.findAll(pageable);
+    }
 
     // @Override
     // public Page<ProductEntity> findAllAndPrice(Double minPrice, Double maxPrice, Pageable pageable) {
