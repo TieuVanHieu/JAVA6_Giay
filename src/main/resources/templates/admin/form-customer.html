@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<title>Chi Tiết Khách Hàng</title>
+<div th:replace="admin/layout/head :: head"></div>
+<body class="app sidebar-mini rtl">
+	<!-- Navbar-->
+	<header th:replace="admin/layout/header :: header"></header>
+	<!-- Sidebar menu-->
+	<div th:replace="admin/layout/left-menu :: left-menu"></div>
+	<!-- Sidebar menu-->
+
+	<main class="app-content">
+		<div class="app-title">
+			<ul class="app-breadcrumb breadcrumb">
+				<li class="breadcrumb-item">Danh sách khách hàng</li>
+				<li class="breadcrumb-item"><a href="#">Cập nhật thông tin
+						khách hàng</a></li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<form:form action="/customer" modelAttribute="" class="row g-3">
+					<div class="form-group col-md-4">
+						<label class="control-label">Mã Khách hàng</label>
+						<form:input path="customer_id" class="form-control"
+							readonly="True" />
+					</div>
+					<div class="form-group col-md-4">
+						<label class="control-label">Email</label>
+						<form:input path="accounts.email" class="form-control"
+							readonly="True" />
+					</div>
+					<div class="form-group col-md-4">
+						<label class="control-label">Họ và tên</label>
+						<form:input class="form-control" path="name" />
+					</div>
+					<div class="form-group col-md-4">
+						<label class="control-label">Địa chỉ</label>
+						<form:input class="form-control" path="address" />
+					</div>
+					<div class="form-group  col-md-4">
+						<label class="control-label">Số điện thoại</label>
+						<form:input class="form-control" path="phone" />
+					</div>
+					<div class="form-group col-md-4">
+						<label class="control-label">Ngày sinh</label>
+						<form:input class="form-control" path="birthday" />
+					</div>
+					<div class="form-group  col-md-4">
+						<label for="exampleSelect1" class="control-label">Giới
+							tính</label>
+						<div class="form-check">
+							<form:radiobutton path="gender" class="form-check-input"
+								id="flexRadioDefault1" value="True" />
+							<label class="form-check-label" for="flexRadioDefault1">
+								Nam </label>
+						</div>
+						<div class="form-check">
+							<form:radiobutton path="gender" class="form-check-input"
+								id="flexRadioDefault2" value="False" />
+							<label class="form-check-label" for="flexRadioDefault2">
+								Nữ </label>
+						</div>
+					</div>
+					<div class="form-group  col-md-12">
+						<button class="btn btn-save" formaction="/customer/update">Lưu
+							lại</button>
+						<a class="btn btn-cancel" href="/customer">Hủy bỏ</a>
+					</div>
+				</form:form>
+			</div>
+		</div>
+
+	</main>
+
+
+	<div th:replace="admin/layout/script2 :: script2"></div>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<title>Quản Lý Chi Tiết Đơn Hàng</title>
+<div th:replace="admin/layout/head :: head"></div>
+<body onload="time()" class="app sidebar-mini rtl">
+	<!-- Navbar-->
+	<header th:replace="admin/layout/header :: header"></header>
+	<!-- Sidebar menu-->
+	<div th:replace="admin/layout/left-menu :: left-menu"></div>
+	<!-- Sidebar menu-->
+
+	<main class="app-content">
+		<div class="app-title">
+			<ul class="app-breadcrumb breadcrumb side">
+				<li class="breadcrumb-item active"><a href="#"><b>Danh
+							sách chi tiết đơn hàng</b></a></li>
+			</ul>
+			<div id="clock"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="tile">
+					<div class="tile-body">
+						<div class="row element-button">
+							<div class="col-sm-2">
+								<a class="btn btn-delete btn-sm print-file" type="button"
+									title="In" onclick="myApp.printTable()"><i
+									class="fas fa-print"></i> In dữ liệu</a>
+							</div>
+							<div class="col-sm-2">
+								<a class="btn btn-delete btn-sm print-file js-textareacopybtn"
+									type="button" title="Sao chép"><i class="fas fa-copy"></i>
+									Sao chép</a>
+							</div>
+
+							<div class="col-sm-2">
+								<a class="btn btn-excel btn-sm" href="" title="In"><i
+									class="fas fa-file-excel"></i> Xuất Excel</a>
+							</div>
+							<div class="col-sm-2">
+								<a class="btn btn-delete btn-sm pdf-file" type="button"
+									title="In" onclick="myFunction(this)"><i
+									class="fas fa-file-pdf"></i> Xuất PDF</a>
+							</div>
+						</div>
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>ID đơn hàng</th>
+									<th>Tên khách hàng</th>
+									<th>Ngày đặt hàng</th>
+									<th>Nhân Viên</th>
+									<th>Tổng tiền</th>
+									<th>Trạng thái</th>
+									<th>Xem chi tiết đơn hàng</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="order1" items="${orders}">
+									<tr>
+										<td>${order1.orderId}</td>
+										<td>${order1.shippingInfo[0].shippingName}</td>
+										<td>${order1.orderDate}</td>
+										<td>${order1.user.userId}</td>
+										<td><fmt:formatNumber type="currency"
+												maxFractionDigits="0" value="${order1.totalAmount}"
+												currencyCode="VND" /></td>
+										<td>${order1.orderStatus.statusName}</td>
+										<td><a class="" type="button"
+											href="/admin/orderDetail/${order1.orderId}"> <i
+												class="fas fa-edit"></i></a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+
+
+	<div th:replace="admin/layout/script2 :: script2"></div>
+	<script type="text/javascript">
+        $('#sampleTable').DataTable();
+        //Thời Gian
+    function time() {
+      var today = new Date();
+      var weekday = new Array(7);
+      weekday[0] = "Chủ Nhật";
+      weekday[1] = "Thứ Hai";
+      weekday[2] = "Thứ Ba";
+      weekday[3] = "Thứ Tư";
+      weekday[4] = "Thứ Năm";
+      weekday[5] = "Thứ Sáu";
+      weekday[6] = "Thứ Bảy";
+      var day = weekday[today.getDay()];
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      nowTime = h + " giờ " + m + " phút " + s + " giây";
+      if (dd < 10) {
+        dd = '0' + dd
+      }
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+        '</span>';
+      document.getElementById("clock").innerHTML = tmp;
+      clocktime = setTimeout("time()", "1000", "Javascript");
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+    }
+    </script>
+</body>
+</html>

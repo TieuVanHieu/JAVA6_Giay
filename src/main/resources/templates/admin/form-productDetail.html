@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<title>Chi Tiết Sản Phẩm</title>
+<div th:replace="admin/layout/head :: head"></div>
+
+<body class="app sidebar-mini rtl">
+	<style>
+.Choicefile {
+	display: block;
+	background: #14142B;
+	border: 1px solid #fff;
+	color: #fff;
+	width: 150px;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	padding: 5px 0px;
+	border-radius: 5px;
+	font-weight: 500;
+	align-items: center;
+	justify-content: center;
+}
+
+.Choicefile:hover {
+	text-decoration: none;
+	color: white;
+}
+
+#uploadfile, .removeimg {
+	display: none;
+}
+
+#thumbbox {
+	position: relative;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.removeimg {
+	height: 25px;
+	position: absolute;
+	background-repeat: no-repeat;
+	top: 5px;
+	left: 5px;
+	background-size: 25px;
+	width: 25px;
+	/* border: 3px solid red; */
+	border-radius: 50%;
+}
+
+.removeimg::before {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	content: '';
+	border: 1px solid red;
+	background: red;
+	text-align: center;
+	display: block;
+	margin-top: 11px;
+	transform: rotate(45deg);
+}
+
+.removeimg::after {
+	/* color: #FFF; */
+	/* background-color: #DC403B; */
+	content: '';
+	background: red;
+	border: 1px solid red;
+	text-align: center;
+	display: block;
+	transform: rotate(-45deg);
+	margin-top: -2px;
+}
+</style>
+	<!-- Navbar-->
+	<header th:replace="admin/layout/header :: header"></header>
+	<!-- Sidebar menu-->
+	<div th:replace="admin/layout/left-menu :: left-menu"></div>
+	<!-- Sidebar menu-->
+
+	<main class="app-content">
+		<div class="app-title">
+			<ul class="app-breadcrumb breadcrumb">
+				<li class="breadcrumb-item">Danh sách chi tiết sản phẩm</li>
+				<li class="breadcrumb-item"><a href="#">Thêm chi tiết sản
+						phẩm</a></li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="tile">
+					<h3 class="tile-title">Tạo mới chi tiết sản phẩm</h3>
+					<form:form class="row" action="/productDetail"
+						modelAttribute="productDetail" enctype="multipart/form-data">
+						<div class="form-group col-md-4">
+							<label class="control-label">Mã sản phẩm</label>
+							<form:input path="productDetailId" class="form-control"
+								readonly="True" />
+							<!-- <input class="form-control"
+												readonly="" /> -->
+						</div>
+
+						<div class="form-group col-md-4">
+							<label class="control-label">Tên sản phẩm</label>
+							<form:input path="product.productName" class="form-control" />
+							<!-- <input class="form-control"
+												readonly="" /> -->
+						</div>
+
+
+						<div class="form-group col-md-4">
+							<label class="control-label">Kích cỡ</label>
+							<!-- <form:select path="size" class="form-control">
+													<form:options items="${SizeIds}" lable="SizeName"/>
+												</form:select> -->
+							<form:select path="size.sizeName" class="form-control">
+								<form:options items="${SizeIds}" />
+							</form:select>
+							<!-- <input class="form-control"
+												readonly="" /> -->
+						</div>
+						<!-- <div class="form-group col-md-4">
+												<label for="category_id">Danh mục</label>
+												<select path="category.categoryId" class="form-control">
+													<options items="${categoryIds}" />
+												</select>
+												<select>
+													<option items="">
+												</select>
+											</div> -->
+						<div class="form-group col-md-4">
+							<label class="control-label">Số Lượng</label>
+							<form:input path="quantity" class="form-control" type="number" />
+							<!-- <input class="form-control"
+												type="number" /> -->
+						</div>
+						<div class="form-group col-md-4">
+							<label class="control-label">Màu Sắc</label>
+							<!-- <form:select path="color.colorId" class="form-control">
+													<form:options items="${ColorIds}" lable="ColorName"/>
+												</form:select> -->
+							<form:select path="color.colorName" class="form-control">
+								<form:options items="${ColorIds}" />
+							</form:select>
+							<!-- <input class="form-control"
+												type="number" /> -->
+						</div>
+						<div class="form-group col-md-12">
+							<button class="btn btn-save" formaction="/productDetail/create">Lưu
+								lại</button>
+							<a class="btn btn-cancel" href="/productDetail">Hủy bỏ</a>
+						</div>
+						<h1>${message}</h1>
+					</form:form>
+				</div>
+			</div>
+		</div>
+	</main>
+
+
+	<div th:replace="admin/layout/script2 :: script2"></div>
+	</script>
+	<script>
+							const inpFile = document.getElementById("inpFile");
+							const loadFile = document.getElementById("loadFile");
+							const previewContainer = document.getElementById("imagePreview");
+							const previewImage = previewContainer
+								.querySelector(".image-preview__image");
+							const previewDefaultText = previewContainer
+								.querySelector(".image-preview__default-text");
+							inpFile.addEventListener("change", function () {
+								const file = this.files[0];
+								if (file) {
+									const reader = new FileReader();
+									previewDefaultText.style.display = "none";
+									previewImage.style.display = "block";
+									reader.addEventListener("load", function () {
+										previewImage.setAttribute("src", this.result);
+									});
+									reader.readAsDataURL(file);
+								}
+							});
+						</script>
+</body>
+
+</html>

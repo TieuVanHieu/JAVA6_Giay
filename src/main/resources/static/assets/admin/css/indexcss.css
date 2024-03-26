@@ -1,0 +1,45 @@
+#dm:hover {
+background-color: rgb(238, 231, 231);
+border: 1px solid  #0072bc;
+}
+#sp:hover {
+    background-color: rgb(244, 242, 242);
+    border: 1px solid  #0072bc;
+    }
+     #dmmodel:hover {
+        background-color: rgb(238, 231, 231);
+        border: 1px solid  #0072bc;
+        }
+       
+        #gh:hover {
+            border: 1px solid #0072bc;
+        }
+           .li-ti:hover  .chon-dangnhap{
+            opacity: 1;
+            visibility:visible;
+            z-index: 2;
+        }
+        .chon-dangnhap{
+            width: 300px;
+           
+            margin:  0 auto;
+            background-color : #fff ;
+            padding-top: 1px;
+            position: absolute;
+            right: -80%;
+            top: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 1s;
+           box-shadow: 0 0 10px #ccc;
+          
+        }
+        .chon-dangnhap:before{
+           
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top:10px solid transparent;
+            border-bottom: 20px solid #fff ;
+            top: -15%;
+            left: 76%;
+         }
