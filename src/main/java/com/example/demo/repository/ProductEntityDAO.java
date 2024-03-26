@@ -22,7 +22,7 @@ public interface ProductEntityDAO extends JpaRepository<ProductEntity, Integer> 
     // Page<ProductEntity> findAll(Pageable pageable);
 
     // // tìm sản phẩm theo categoryid
-    // Page<ProductEntity> findByCategoryCategoryId(Integer categoryId, Pageable page);
+    Page<ProductEntity> findByCategoryCategoryId(Optional<Integer> categoryId, Pageable page);
 
     // // tìm sản phẩm theo categoryid và giá trong khoản min max
     // Page<ProductEntity> findByCategoryCategoryIdAndProductPriceBetween(Integer categoryId, Double minPrice,

@@ -13,6 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Nationalized;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,19 +31,16 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer orderId;
-    Date orderDate = new Date();
-    Double totalAmount;
+    @Temporal(TemporalType.TIMESTAMP)
+    Date orderDate;
+    @Nationalized
+    String orderAddress;
 
     @ManyToOne
-    @JoinColumn(name = "statusId")
-    OrderStatusEntity orderStatus;
+    @JoinColumn(name = "userName")
+    AccountEntity account;;
 
     @JsonIgnore
     @OneToMany(mappedBy = "order")
     List<OrderDetailEntity> orderDetail;
-
-    @ManyToOne
-    @JoinColumn(name = "shippingId")
-    ShippingInfoEntity shippingInfo;
-
 }

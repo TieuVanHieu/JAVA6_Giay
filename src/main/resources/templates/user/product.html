@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <!-- Mirrored from portotheme.com/html/molla/product-extended.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jan 2024 03:16:00 GMT -->
   <!-- Added by HTTrack -->
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <!-- /Added by HTTrack -->
   <head th:replace="user/layout/head :: head"></head>
-  <body>
-    <div class="page-wrapper">
+  <body ng-app="shopping-cart-app" ng-controller="shipping-cart-ctrl">
+    <div class="page-wrapper" >
       <header th:replace="user/layout/header :: header"></header>
       <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
@@ -123,6 +123,7 @@
                 <!-- End .col-md-6 -->
 
                 <div class="col-md-6">
+                  <label id="proId" hidden>[(${detail_id})]</label>
                   <div class="product-details">
                     <h1 class="product-title">[(${detail_name})]</h1>
                     <!-- End .product-title -->
@@ -150,49 +151,32 @@
                     </div>
                     <!-- End .product-content -->
 
-                    <div class="details-filter-row details-row-size">
-                      <label>Color:</label>
-                      <div class="product-nav product-nav-dots">
-                        <a
-                          th:each="color : ${colors}"
-                          th:style="'background: ' + ${color.colorName}"
-                          href="#"
-                          class="active"
-                        >
-                          <span
-                            class="sr-only"
-                            th:text="${color.colorName}"
-                          ></span>
-                        </a>
-                        <!-- <a href="#" style="background: #333333"
-                          ><span class="sr-only">Color name</span></a
-                        >
-                        <a href="#" style="background: #3a588b"
-                          ><span class="sr-only">Color name</span></a
-                        >
-                        <a href="#" style="background: #caab97"
-                          ><span class="sr-only">Color name</span></a
-                        > -->
-                      </div>
-                      <!-- End .product-nav -->
-                    </div>
+                    
                     <!-- End .details-filter-row -->
 
+                    <div class="details-filter-row details-row-color">
+                      <label for="size">Color:</label>
+                      <div class="select-custom">
+                        <select ng-model="color" name="color" id="color" class="form-control">
+                          <option value="5" selected="selected">
+                            Select a color
+                        </option>
+                          <option th:each="color : ${colors}" th:value="${color.colorId}">[(${color.colorName})]</option>
+                        </select>
+                      </div>
+                      <!-- End .select-custom -->
+                    </div>
                     <div class="details-filter-row details-row-size">
                       <label for="size">Size:</label>
                       <div class="select-custom">
-                        <select name="size" id="size" class="form-control">
-                          <option value="" selected="selected">
+                        <select ng-model="size" name="size" id="size" class="form-control">
+                          <option value="5" selected="selected">
                             Select a size
                           </option>
                           <option th:each="size : ${sizes}" th:value="${size.sizeId}">[(${size.sizeName})]</option>
                         </select>
                       </div>
                       <!-- End .select-custom -->
-
-                      <a href="#" class="size-guide"
-                        ><i class="icon-th-list"></i>size guide</a
-                      >
                     </div>
                     <!-- End .details-filter-row -->
 
@@ -200,6 +184,7 @@
                       <label for="qty">Qty:</label>
                       <div class="product-details-quantity">
                         <input
+                        ng-model="qty"
                           type="number"
                           id="qty"
                           class="form-control"
@@ -216,7 +201,7 @@
                     <!-- End .details-filter-row -->
 
                     <div class="product-details-action">
-                      <a href="#" class="btn-product btn-cart"
+                      <a type="button" th:attr="ng-click=@{|cart.add()|}" class="btn-product btn-cart"
                         ><span>add to cart</span></a
                       >
 

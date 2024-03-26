@@ -29,10 +29,16 @@ public class UserProductController {
 	ProductDetailService productDetailService;
 
     @RequestMapping("/product")
-	public String category(@RequestParam("p") Optional<Integer> p,Model model) {
-       Pageable pageable = PageRequest.of(p.orElse(0), 9);
-       Page<ProductEntity> page = productService.findAll(pageable);
-       model.addAttribute("items", page);
+	public String category(@RequestParam("p") Optional<Integer> p,@RequestParam("cid") Optional<Integer> cid,Model model) {
+        Pageable pageable = PageRequest.of(p.orElse(0), 9);
+        if (cid.isPresent()) {
+            Page<ProductEntity> page = productService.findByCategoryId(cid,pageable);
+            model.addAttribute("items", page);
+
+        }else{
+            Page<ProductEntity> page = productService.findAll(pageable);
+            model.addAttribute("items", page);
+        } 
 		return "user/category";
 	}
 
@@ -45,7 +51,7 @@ public class UserProductController {
         
 		for (ProductDetailEntity productDetail : productDetailService.findByProductId(id)) {
             if (count == 1) {
-				model.addAttribute("items", productService.findByCategoryId(productDetail.getProduct().getCategory().getCategoryId()));
+				model.addAttribute("items", productService.findByCategoryIdList(productDetail.getProduct().getCategory().getCategoryId()));
                 model.addAttribute("detail_id", productDetail.getProduct().getProductId());
                 model.addAttribute("detail_image", productDetail.getProduct().getProductImages());
                 model.addAttribute("detail_name", productDetail.getProduct().getProductName());

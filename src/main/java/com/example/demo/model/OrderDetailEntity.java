@@ -28,6 +28,6 @@ public class OrderDetailEntity {
     OrderEntity order;
 
     @ManyToOne
-    @JoinColumn(name = "productDetailId")
-    ProductDetailEntity productDetial;
+    @JoinColumn(name = "productId")
+    ProductEntity product;
 }

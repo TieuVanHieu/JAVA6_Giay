@@ -14,8 +14,8 @@ public interface ProductDetailEntityDAO extends JpaRepository<ProductDetailEntit
     List<ProductDetailEntity> findByProductProductId(Integer id);
 
     // // tim productdetail theo colorid và sizeid và productid
-    // ProductDetailEntity findByColorColorIdAndSizeSizeIdAndProductProductId(Integer colorId, Integer sizeId,
-    //         Integer productId);
+    ProductDetailEntity findByColorColorIdAndSizeSizeIdAndProductProductId(Integer colorId, Integer sizeId,
+            Integer productId);
     // // user
 
 }

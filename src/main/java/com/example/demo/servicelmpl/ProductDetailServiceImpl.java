@@ -22,10 +22,10 @@ public class ProductDetailServiceImpl implements ProductDetailService {
         return detailEntityDAO.findByProductProductId(id);
     }
 
-    // @Override
-    // public ProductDetailEntity findByColorColorIdAndSizeSizeIdAndProductProductId(Integer colorId, Integer sizeId,
-    //         Integer productId) {
-    //     return detailEntityDAO.findByColorColorIdAndSizeSizeIdAndProductProductId(colorId, sizeId, productId);
-    // }
+    @Override
+    public ProductDetailEntity findByColorColorIdAndSizeSizeIdAndProductProductId(Integer colorId, Integer sizeId,
+            Integer productId) {
+        return detailEntityDAO.findByColorColorIdAndSizeSizeIdAndProductProductId(colorId, sizeId, productId);
+    }
 
 }

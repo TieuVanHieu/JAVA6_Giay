@@ -17,8 +17,8 @@ public interface ProductDetailService {
     List<ProductDetailEntity> findByProductId(Integer id);
 
     // // tìm productdeetail theo productid color size
-    // ProductDetailEntity findByColorColorIdAndSizeSizeIdAndProductProductId(Integer colorId, Integer sizeId,
-    //         Integer productId);
+    ProductDetailEntity findByColorColorIdAndSizeSizeIdAndProductProductId(Integer colorId, Integer sizeId,
+            Integer productId);
 
     // // tìm productdeetail theo cart
     // // user

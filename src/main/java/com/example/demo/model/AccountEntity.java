@@ -42,9 +42,9 @@ public class AccountEntity  implements Serializable{
     String phone;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "account")
-	List<ShippingInfoEntity> shippingInfo;
-	
+    @OneToMany(mappedBy = "account")
+	List<OrderEntity> order;
+
 	@JsonIgnore
 	@OneToOne(mappedBy = "account")
 	CartEntity cart;

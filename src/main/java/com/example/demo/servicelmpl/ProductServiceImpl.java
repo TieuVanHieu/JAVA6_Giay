@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     // }
 
     @Override
-    public List<ProductEntity> findByCategoryId(Integer id) {
+    public List<ProductEntity> findByCategoryIdList(Integer id) {
         return productEntityDAO.findByCategoryCategoryId(id);
     }
 
@@ -40,10 +40,12 @@ public class ProductServiceImpl implements ProductService {
     //     return productEntityDAO.findByProductPriceBetween(minPrice, maxPrice, pageable);
     // }
 
-    // @Override
-    // public Page<ProductEntity> findByCategoryId(Integer categoryId, Pageable pageable) {
-    //     return productEntityDAO.findByCategoryCategoryId(categoryId, pageable);
-    // }
+    @Override
+    public Page<ProductEntity> findByCategoryId(Optional<Integer> categoryId, Pageable pageable) {
+        return productEntityDAO.findByCategoryCategoryId(categoryId, pageable);
+    }
+
+
 
     // @Override
     // public Page<ProductEntity> findByCategoryIdAndPrice(Integer categoryId, Double minPrice, Double maxPrice,
