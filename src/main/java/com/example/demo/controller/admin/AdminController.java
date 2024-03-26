@@ -81,4 +81,8 @@ public String formStatistical() {
 public String formListOrderDetail() {
 	return "admin/list-orderDetail";
 }
+@RequestMapping("/admin/Color-management")
+public String ColorManagement() {
+	return "admin/Color-management";
+}
 }
