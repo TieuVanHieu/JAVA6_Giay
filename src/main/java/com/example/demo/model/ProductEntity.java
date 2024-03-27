@@ -36,10 +36,6 @@ public class ProductEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "product")
-    List<OrderDetailEntity> orderDetail;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
     List<ProductDetailEntity> productDetail;
 
     @ManyToOne

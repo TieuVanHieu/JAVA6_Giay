@@ -26,7 +26,6 @@ public class ProductRestController {
         @PathVariable("proId") Integer proId, 
         @PathVariable("qty") Integer qty){
         ProductDetailEntity entity = productDetailService.findByColorColorIdAndSizeSizeIdAndProductProductId(color, size, proId);
-        entity.setQuantity(qty);
         return entity;
     }
     
