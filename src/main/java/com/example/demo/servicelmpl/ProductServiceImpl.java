@@ -45,6 +45,11 @@ public class ProductServiceImpl implements ProductService {
         return productEntityDAO.findByCategoryCategoryId(categoryId, pageable);
     }
 
+    @Override
+    public ProductEntity findById(Integer id) {
+        return productEntityDAO.findById(id).orElse(null);
+    }
+
 
 
     // @Override
