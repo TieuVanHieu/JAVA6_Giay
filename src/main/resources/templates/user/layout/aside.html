@@ -1,0 +1,28 @@
+<aside class="col-md-4 col-lg-2" th:fragment="${aside}">
+    <!-- <nav>
+        <div class="menu">
+            <ul>
+                <li class="nav-item"><a class="nav-link " href="/order/list">Order</a></li>
+                <li class="nav-item"><a class="nav-link " href="/order/account">Account Details</a></li>
+            </ul>
+        </div>
+    </nav> -->
+
+    <nav class="main-nav">
+        <ul class="menu sf-arrows" style="display: block;">
+            <li style="padding-bottom:-10px;">
+                <a th:href="@{/order/list}" 
+                style="border-bottom: 2px rgb(152, 152, 152) solid; 
+                text-align: center;
+                font-size: 15px;
+                " >ĐƠN HÀNG</a>
+            </li >
+            <li>
+                <a th:href="@{/order/account}" style="border-bottom: 2px rgb(152, 152, 152) solid; 
+                text-align: center;
+                font-size: 15px;
+                ">THÔNG TIN CÁ NHÂN</a>              
+            </li>
+        </ul><!-- End .menu -->
+    </nav><!-- End .main-nav -->
+</aside>

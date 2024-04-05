@@ -36,9 +36,9 @@ public class AccountEntity  implements Serializable{
     @Email(message = "Email không đúng định dạng !")
     @NotBlank(message = "Email không thê để trong !")
     String email;
+     @Pattern(regexp = "^(0[3|5|7|8|9])+([0-9]{8})", message = "Số điện thoại di động không hợp lệ!")
+    // @Size(max = 10, min = 10, message = "Số điện thoại phải 10 số !")
 	@NotBlank(message = "Vui long nhập số điện thoại !")
-    @Size(max = 10, min = 10, message = "Số điện thoại phải 10 số !")
-    @Pattern(regexp = "^(0[3|5|7|8|9])+([0-9]{8})", message = "Số điện thoại di động không hợp lệ!")
     String phone;
 
 	@JsonIgnore

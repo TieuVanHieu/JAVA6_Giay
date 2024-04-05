@@ -10,6 +10,8 @@ import com.example.demo.model.OrderEntity;
  * OrderEntityDAO
  */
 public interface OrderEntityDAO extends JpaRepository<OrderEntity, Integer> {
+
+    List<OrderEntity> findByAccountUserName(String username);
     // // user
     // List<OrderEntity> findByUserUserId(Integer userId);
 

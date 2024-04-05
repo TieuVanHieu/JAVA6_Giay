@@ -13498,6 +13498,10 @@ button:focus {
   width: 160px;
   font-weight: 400;
   font-size: 1.6rem; }
+  .table .orderid-col {
+    width: 50px;
+    font-weight: 400;
+    font-size: 1.6rem; }
 .table .action-col {
   width: 202px; }
   .table .action-col .btn {

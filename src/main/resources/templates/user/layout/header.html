@@ -13,27 +13,22 @@
                         <ul>
                             <li>
                                 <div class="header-dropdown">
-                                    <a href="#">USD</a>
+                                    <a th:href="@{'?lang=vi'}" th:text="#{nav.nn}">Tiếng Việt</a>
                                     <div class="header-menu">
                                         <ul>
-                                            <li><a href="#">Eur</a></li>
-                                            <li><a href="#">Usd</a></li>
-                                        </ul>
-                                    </div><!-- End .header-menu -->
-                                </div>
-                            </li>
-                            <li>
-                                <div class="header-dropdown">
-                                    <a href="#">English</a>
-                                    <div class="header-menu">
-                                        <ul>
-                                            <li><a href="#">English</a></li>
-                                            <li><a href="#">French</a></li>
-                                            <li><a href="#">Spanish</a></li>
+                                            <li><a th:href="@{'?lang=vi'}">Tiếng Việt</a></li>
+                                            <li><a th:href="@{'?lang=en'}">Tiếng Anh</a></li>
                                         </ul>
                                 </div>
                             </li>
-                            <li><a href="#signin-modal" data-toggle="modal">Sign in / Sign up</a></li>
+                            <th:block th:if="${#request.remoteUser}">
+                                <li><a th:href="@{/security/logoff}">Sign Out</a></li>
+                                <li><a>Welcome [[${#request.remoteUser}]]</a></li>
+                            </th:block>
+                            <th:block th:unless="${#request.remoteUser}">
+                                <li><a th:href="@{/security/login/form}">Sign in</a> / <a th:href="@{/signUp/form}"> Sign up</a></li>
+                            </th:block>
+                            
                         </ul>
                     </li>
                 </ul><!-- End .top-menu -->
@@ -98,15 +93,35 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-cart-products">
+                            <div class="product" ng-repeat="item in cart.items">
+                                <div class="product-cart-details">
+                                    <h4 class="product-title">
+                                        <a href="product.html">{{item.product.productName}}(<small>{{item.color.colorName}}</small>)(<small>{{item.size.sizeName}}</small>)</a>
+                                    </h4>
+
+                                    <span class="cart-product-info">
+                                        <span class="cart-product-qty">{{item.qty}}</span>
+                                        x {{item.product.productPrice | number}} VND
+                                    </span>
+                                </div><!-- End .product-cart-details -->
+
+                                <figure class="product-image-container">
+                                    <a href="product.html" class="product-image">
+                                        <img src="../../../assets/user/images/products/item/{{item.product.productImages}}" alt="product">
+                                    </a>
+                                </figure>
+                                <a href="#" class="btn-remove" title="Remove Product" ng-click="cart.remove(item.id)"><i class="icon-close"></i></a>
+                            </div><!-- End .product -->
+                        </div>
                         <div class="dropdown-cart-total">
                             <span>Total</span>
-
                             <span class="cart-total-price">{{cart.amount|number}} VND</span>
                         </div><!-- End .dropdown-cart-total -->
 
                         <div class="dropdown-cart-action">
                             <a href="/cart" class="btn btn-primary">View Cart</a>
-                            <a href="/checkout" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                            <a href="/order/checkout" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdown-menu -->
                 </div><!-- End .cart-dropdown -->
@@ -118,7 +133,7 @@
         <div class="container">
             <div class="header-left">
                 <div class="dropdown category-dropdown">
-                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories" th:text="#{nav.BrCategories}">
                         Browse Categories <i class="icon-angle-down"></i>
                     </a>
 
@@ -138,21 +153,23 @@
                 <nav class="main-nav">
                     <ul class="menu sf-arrows">
                         <li class="megamenu-container">
-                            <a href="/index" class="sf-with-ul">Home</a>
+                            <a th:href="@{/index}" class="sf-with-ul" th:text="#{nav.home}">Home</a>
                         </li >
                         <li>
-                            <a href="/product" class="sf-with-ul">Shop</a>
+                            <a th:href="@{/product}" class="sf-with-ul" th:text="#{nav.product}">Shop</a>
                            
                         </li>
                         <!-- <li>
                             <a href="/product" class="sf-with-ul">Product</a>
                         </li> -->
                         <li>
-                            <a href="/dashboard" class="sf-with-ul">Thong tin</a>
+                            <a th:href="@{/order/list}" class="sf-with-ul" th:text="#{nav.infomation}">Thong tin</a>
                         </li>
-                        <li>
-                            <a href="elements-list.html" class="sf-with-ul">Quan tri</a>
-                        </li>
+                        <th:block th:if="${#request.remoteUser}">
+                            <li th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
+                                <a th:href="@{/admin}" class="sf-with-ul" th:text="#{nav.administrator}">Quan tri</a>
+                            </li>
+                        </th:block>
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->
             </div><!-- End .header-center -->

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{user/dashboard :: conten(~{::#tab-content})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab-content">
+        <table class="table table-wishlist table-mobile">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">OrderID</th>
+                    <th scope="col">OrderDate</th>
+                    <th scope="col">Shipping Address</th> <!-- Adjust width as needed -->
+                    <th scope="col">Xem chi tiết đơn hàng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item,state : ${order}">
+                    <td class="product-title">[[${state.index+1}]]</td>
+                    <td class="product-title">[[${item.orderId}]]</td>
+                    <td class="product-title" th:text="${#dates.format(item.orderDate, 'dd-MM-yyyy')}"></td>
+                    <td class="product-title" th:text="${item.orderAddress}"></td> <!-- Adjust width as needed -->
+                    <td style="text-align: center;">
+                        <button class="btn btn-block btn-outline-primary-2" aria-expanded="false">
+                            <i class="icon-list-alt"></i>
+                            <a th:href="@{|/order/detail/${item.orderId}|}">XEM CHI TIẾT</a>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{user/dashboard :: conten(~{::#tab-content})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab-content">
+        <div class="container" th:object="${order}">
+            <div class="summary" style="margin-right:  100px;">
+                <h3 class="summary-title" style="text-align: center;">CHI TIẾT ĐƠN HÀNG</h3><!-- End .summary-title -->
+
+                <table class="table table-summary" >
+
+                    <tbody>
+                        <tr class="summary-subtotal">
+                            <td>Họ và Tên: </td>
+                            <td style="display: flex; align-items: center;">[[*{account.userName}]]</td>
+                        </tr><!-- End .summary-subtotal -->
+                        <tr>
+                            <td>Địa chỉ: </td>
+                            <td style="display: flex; align-items: center;" th:text="*{orderAddress}"></td>
+                        </tr>
+                        <tr>
+                            <td>Ngày mua: </td>
+                            <td style="display: flex; align-items: center;" th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy')}"></td>
+                        </tr>
+                        <tr class="summary-total">
+                            <td>Tổng tiền: </td>
+                            <td style="display: flex; align-items: center;" th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')} + VND"></td>
+                        </tr><!-- End .summary-total -->
+                    </tbody>
+                </table><!-- End .table table-summary -->
+
+                <table class="table table-wishlist table-mobile">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        <tr th:each="detail : *{orderDetail}" th:object="${detail}">
+                            <td class="product-col">
+                                <div class="product">
+                                    <figure class="product-media">
+                                        <a href="#">
+                                            <img th:src="@{|../../../assets/user/images/products/item/${detail.productDetail.product.productImages}|}">
+                                        </a>
+                                    </figure>
+        
+                                    <h3 class="product-title">
+                                        <label></label>
+                                        <a href="#">[[*{productDetail.product.productName}]]( <small>[[*{productDetail.color.colorName}]]</small> : <small>[[*{productDetail.size.sizeName}]]</small> )</a>
+                                    </h3><!-- End .product-title -->
+                                </div><!-- End .product -->
+                            </td>
+                            <td class="stock-col" th:text="${#numbers.formatDecimal(detail.productDetail.product.productPrice, 0, 'COMMA', 0, 'POINT')} + VND"></td>
+                            <td class="stock-col" th:text="*{quantity}"></td>
+                            <td class="stock-col" th:text="${#numbers.formatDecimal(detail.productDetail.product.productPrice*detail.quantity, 0, 'COMMA', 0, 'POINT')} + VND">20000</td>
+                            <!-- <td class="price-col">$84.00</td>
+                            <td class="stock-col"><span class="in-stock">In stock</span></td>
+                            <td class="action-col">
+                                <div class="dropdown">
+                                <button class="btn btn-block btn-outline-primary-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-list-alt"></i>Select Options
+                                </button>
+        
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">First option</a>
+                                    <a class="dropdown-item" href="#">Another option</a>
+                                    <a class="dropdown-item" href="#">The best option</a>
+                                  </div>
+                                </div>
+                            </td>
+                            <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
