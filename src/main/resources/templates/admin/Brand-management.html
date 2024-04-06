@@ -56,19 +56,20 @@
 								<tr>
 									<th>ID thương hiệu</th>
 									<th>Tên sản phẩm</th>
+									<th>Chức Năng</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="brand" items="${brand}">
-									<tr>
-										<td>${brand.brandId}</td>
-										<td>${brand.brandName}</td>
+								<!-- <c:forEach var="brand" items="${brand}"> -->
+									<tr th:each="brand, loopStatus : ${brand}">
+										<td th:text="${brand.brandId}"></td>
+										<td th:text="${brand.brandName}"></td>
 										<td><a class="btn btn-primary btn-sm edit" type="button"
-											href="/brand/edit/${brand.brandId}"> <i
+											th:href="@{/brand/edit/{id}(id=${brand.brandId})}"><i
 												class="fas fa-edit"></i>
 										</a>
 									</tr>
-								</c:forEach>
+								<!-- </c:forEach> -->
 							</tbody>
 						</table>
 					</div>
