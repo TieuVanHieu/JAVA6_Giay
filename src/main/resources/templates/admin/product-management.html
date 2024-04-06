@@ -67,7 +67,7 @@
 							<tbody>
 								<c:forEach var="product" items="${product1}">
 									<tr>
-										<td>${product.productId}</td>
+										<td th:text="${product.productId}"></td>
 										<td>${product.productName}</td>
 										<td>${product.productDescription}</td>
 										<td><img class="img-card-person"

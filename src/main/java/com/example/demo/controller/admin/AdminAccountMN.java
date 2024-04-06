@@ -27,13 +27,13 @@ public class AdminAccountMN {
     public String ShowAccount(Model model) {
         List<AccountEntity> AccountEntity = AccountEntityDAO.findAll();
         model.addAttribute("user", AccountEntity);;
-        return "/admin/account-management";
+        return "admin/account/account-management";
     }
 
     @RequestMapping("/form-account")
     public String ShowFA(Model model) {
         model.addAttribute("account", new AccountEntity());
-        return "/admin/form-account"; 
+        return "/admin/account/form-account"; 
     }
 
     // @RequestMapping("/edit/{id}")
