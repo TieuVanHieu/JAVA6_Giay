@@ -24,14 +24,18 @@ public class AdminBrandMN {
     public String ShowBrand(Model model){
         List<BrandEntity> brandEntity = brandEntityDAO.findAll();
         model.addAttribute("brand", brandEntity);
+
         return "/admin/Brand-management";
+
     }
     
 
     @RequestMapping("/form-brand")
     public String ShowFB(Model model){
         model.addAttribute("brand", new BrandEntity());
+
         return "admin/form-brand";
+
     }
 
     @RequestMapping("/edit/{brandId}")
@@ -40,7 +44,9 @@ public class AdminBrandMN {
         model.addAttribute("brand", brandEntity);
         List<BrandEntity> brandEntity1 = brandEntityDAO.findAll();
         model.addAttribute("brand1", brandEntity1);
+
         return "/admin/form-brand";
+
     }
 
     @RequestMapping("/create")
