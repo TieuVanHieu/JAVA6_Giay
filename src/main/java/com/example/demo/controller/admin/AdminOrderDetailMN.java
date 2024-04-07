@@ -14,7 +14,7 @@ import com.example.demo.repository.OrderDetailEntityDAO;
 import com.example.demo.repository.OrderEntityDAO;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/orderD")
 public class AdminOrderDetailMN {
     
     @Autowired
@@ -23,7 +23,7 @@ public class AdminOrderDetailMN {
     @Autowired
     OrderDetailEntityDAO orderDetailEntityDAO;
 
-    @RequestMapping("/orderreport")
+    @RequestMapping("")
     public String ShowOrder(Model model){
         List<OrderEntity> orderEntity = orderEntityDAO.findAll();
         List<OrderDetailEntity> od = orderDetailEntityDAO.findAll();

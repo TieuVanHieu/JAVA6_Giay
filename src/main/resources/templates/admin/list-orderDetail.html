@@ -49,6 +49,7 @@
 								<tr>
 									<th>STT</th>
 									<th>Tên sản phẩm</th>
+									<th>Hãng</th>
 									<th>Số lượng</th>
 									<th>Kích cỡ</th>
 									<th>Màu sắc</th>
@@ -57,23 +58,24 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="orderD" items="${orderDetail}"
-									varStatus="status">
-									<tr>
-										<td>${status.count}</td>
-										<td>${orderD.productDetial.product.productName}</td>
-										<td>${orderD.quantity}</td>
-										<td>${orderD.productDetial.size.sizeName}</td>
-										<td>${orderD.productDetial.color.colorName}</td>
-										<td><fmt:formatNumber type="currency"
-												maxFractionDigits="0"
-												value="${orderD.productDetial.product.productPrice}"
-												currencyCode="VND" /></td>
-										<td><fmt:formatNumber type="currency"
-												maxFractionDigits="0" value="${orderD.price}"
-												currencyCode="VND" /></td>
+								
+									<tr th:each="orderDetail, stt : ${orderDetail}">
+										<td th:text="*{stt.index + 1}"></td>
+										<td th:text="${orderDetail.productDetail.product.productName}"></td>
+										<td th:text="${orderDetail.productDetail.product.brand.brandName}"></td>
+										<td th:text="${orderDetail.quantity}"></td>
+										<td th:text="${orderDetail.productDetail.size.sizeName}"></td>
+										<td th:text="${orderDetail.productDetail.color.colorName}"></td>
+										<td>
+											<span
+												th:text="${#numbers.formatDecimal(orderDetail.productDetail.product.productPrice,0,'COMMA',0,'POINT')} + ' VND'"></span>
+										</td>
+										<td>
+											<span
+												th:text="${#numbers.formatDecimal(orderDetail.price,0,'COMMA',0,'POINT')} + ' VND'"></span>
+										</td>
 									</tr>
-								</c:forEach>
+								
 							</tbody>
 						</table>
 					</div>

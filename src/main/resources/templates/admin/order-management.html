@@ -54,24 +54,22 @@
 									<th>Ngày Đặt Hàng</th>
 									<th>Tổng Tiền</th>
 									<th>Số Lượng</th>
-									<th>Ngày đặt hàng</th>
-									<th>Tình trạng</th>
+									<th>Địa Chỉ</th>
 								</tr>
 
 							</thead>
 							<tbody>
-								<c:forEach var="ordersDetail" items="${ordersDetails}">
-									<tr>
-										<td>${ordersDetail.order.orderId}</td>
-										<td>${ordersDetail.order.shippingName}</td>
-										<td>${ordersDetail.productDetial.productName}</td>
-										<td>${ordersDetail.order.orderDate}</td>
-										<td>${ordersDetail.price}</td>
-										<td>${ordersDetail.quantity}</td>
-										<td>${ordersDetail.order.totalAmount}</td>
-										<td>${ordersDetail.order.orderStatus}</td>
+								
+									<tr th:each="orderDetail, loopStatus : ${orderDetail}">
+										<td th:text="${orderDetail.order.orderId}"></td>
+										<td th:text="${orderDetail.order.userName}"></td>
+										<td th:text="${orderDetail.productDetial.productName}"></td>
+										<td th:text="${orderDetail.order.orderDate}"></td>
+										<td th:text="${orderDetail.price}"></td>
+										<td th:text="${orderDetail.quantity}"></td>
+										<td th:text="${orderDetail.order.orderAddress}"></td>
 									</tr>
-								</c:forEach>
+								
 
 							</tbody>
 						</table>

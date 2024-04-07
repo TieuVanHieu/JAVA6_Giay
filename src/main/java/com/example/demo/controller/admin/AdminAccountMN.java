@@ -43,24 +43,24 @@ public class AdminAccountMN {
     //     return "admin/form-account"; 
     // }
 
-    @RequestMapping("/edit/{id}")
-    public String edit(@PathVariable("id") String id, Model model){
-        AccountEntity accountEntity = AccountService.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Username không tồn tại: " + id));
-        model.addAttribute("account", accountEntity);
-        return "/admin/form-account";
-    }
+    // @RequestMapping("/edit/{id}")
+    // public String edit(@PathVariable("id") String id, Model model){
+    //     AccountEntity accountEntity = AccountService.findById(id)
+    //     .orElseThrow(() -> new IllegalArgumentException("Username không tồn tại: " + id));
+    //     model.addAttribute("account", accountEntity);
+    //     return "/admin/form-account";
+    // }
 
-    @PostMapping("/edit/{username}")
-    public String update(@PathVariable("userName") String userName, @ModelAttribute("account") AccountEntity account,Model model){
-        AccountEntity u = AccountEntityDAO.findById(account.getUserName()).orElseThrow();
-        AccountEntityDAO.save(u);
-        return "redirect:/account";
-    }
+    // @PostMapping("/edit/{username}")
+    // public String update(@PathVariable("userName") String userName, @ModelAttribute("account") AccountEntity account,Model model){
+    //     AccountEntity u = AccountEntityDAO.findById(account.getUserName()).orElseThrow();
+    //     AccountEntityDAO.save(u);
+    //     return "redirect:/account";
+    // }
 
-    @RequestMapping("/detele/{username}")
-    public String delete(@PathVariable("userName") String userName, @ModelAttribute("account") AccountEntity account,Model model){
-       AccountEntity u = AccountEntityDAO.findById(account.getUserName()).orElseThrow();
-        return "redirect:/account";
-    }
+    // @RequestMapping("/detele/{username}")
+    // public String delete(@PathVariable("userName") String userName, @ModelAttribute("account") AccountEntity account,Model model){
+    //    AccountEntity u = AccountEntityDAO.findById(account.getUserName()).orElseThrow();
+    //     return "redirect:/account";
+    // }
 }

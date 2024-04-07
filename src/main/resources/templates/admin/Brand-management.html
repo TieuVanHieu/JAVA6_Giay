@@ -19,6 +19,24 @@
 			</ul>
 			<div id="clock"></div>
 		</div>
+		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${messageSuccess}">
+			<strong>Success!</strong> <span th:text="${messageSuccess}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-dismissible fade show" style="background-color: red;" role="alert" th:if="${messageDanger}">
+			<strong>Error!</strong> <span th:text="${messageDanger}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${messageWarning}">
+			<strong>Warning!</strong> <span th:text="${messageWarning}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="tile">
@@ -64,7 +82,10 @@
 									<tr th:each="brand, loopStatus : ${brand}">
 										<td th:text="${brand.brandId}"></td>
 										<td th:text="${brand.brandName}"></td>
-										<td><a class="btn btn-primary btn-sm edit" type="button"
+										<td><a class="btn btn-primary btn-sm trash" type="button"
+											title="Xóa" th:href="@{/brand/delete/{id}(id=${brand.brandId})}" onclick="return confirmDeleteUser();"><i
+												class="fas fa-trash-alt"></i> </a>
+											<a class="btn btn-primary btn-sm edit" type="button"
 											th:href="@{/brand/edit/{id}(id=${brand.brandId})}"><i
 												class="fas fa-edit"></i>
 										</a>

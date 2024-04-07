@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
-<title>Quản Lý Chi Tiết Đơn Hàng</title>
+<title>Quản Lý Đơn Hàng</title>
 <div th:replace="admin/layout/head :: head"></div>
 <body onload="time()" class="app sidebar-mini rtl">
 	<!-- Navbar-->
@@ -14,7 +14,7 @@
 		<div class="app-title">
 			<ul class="app-breadcrumb breadcrumb side">
 				<li class="breadcrumb-item active"><a href="#"><b>Danh
-							sách chi tiết đơn hàng</b></a></li>
+							sách đơn hàng</b></a></li>
 			</ul>
 			<div id="clock"></div>
 		</div>
@@ -46,32 +46,31 @@
 						</div>
 						<table class="table table-bordered">
 							<thead>
+
 								<tr>
 									<th>ID đơn hàng</th>
-									<th>Tên khách hàng</th>
-									<th>Ngày đặt hàng</th>
-									<th>Nhân Viên</th>
-									<th>Tổng tiền</th>
-									<th>Trạng thái</th>
-									<th>Xem chi tiết đơn hàng</th>
+									<th>Khách hàng</th>
+									<th>Tên Sản Phẩm</th>
+									<th>Ngày Đặt Hàng</th>
+									<th>Tổng Tiền</th>
+									<th>Số Lượng</th>
+									<th>Địa Chỉ</th>
 								</tr>
+
 							</thead>
 							<tbody>
-								<c:forEach var="order1" items="${orders}">
-									<tr>
-										<td>${order1.orderId}</td>
-										<td>${order1.shippingInfo[0].shippingName}</td>
-										<td>${order1.orderDate}</td>
-										<td>${order1.user.userId}</td>
-										<td><fmt:formatNumber type="currency"
-												maxFractionDigits="0" value="${order1.totalAmount}"
-												currencyCode="VND" /></td>
-										<td>${order1.orderStatus.statusName}</td>
-										<td><a class="" type="button"
-											href="/admin/orderDetail/${order1.orderId}"> <i
-												class="fas fa-edit"></i></a></td>
+								
+									<tr th:each="orderDetail, loopStatus : ${orderDetail}">
+										<td th:text="${orderDetail.order.orderId}"></td>
+										<td th:text="${orderDetail.order.userName}"></td>
+										<td th:text="${orderDetail.productDetial.productName}"></td>
+										<td th:text="${orderDetail.order.orderDate}"></td>
+										<td th:text="${orderDetail.price}"></td>
+										<td th:text="${orderDetail.quantity}"></td>
+										<td th:text="${orderDetail.order.orderAddress}"></td>
 									</tr>
-								</c:forEach>
+								
+
 							</tbody>
 						</table>
 					</div>

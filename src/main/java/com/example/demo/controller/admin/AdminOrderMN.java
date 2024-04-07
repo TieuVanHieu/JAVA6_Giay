@@ -13,7 +13,7 @@ import com.example.demo.repository.OrderDetailEntityDAO;
 import com.example.demo.repository.OrderEntityDAO;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/order")
 public class AdminOrderMN {
     @Autowired
     OrderEntityDAO orderEntityDAO;
@@ -28,7 +28,7 @@ public class AdminOrderMN {
         model.addAttribute("orders", orderEntity);
         model.addAttribute("ad", od);
         
-        return "/admin/index";
+        return "admin/index";
     }
 
     @RequestMapping("/orderDetail/{Id}")
@@ -36,6 +36,6 @@ public class AdminOrderMN {
         List<OrderDetailEntity> orderDetailEntity = orderDetailEntityDAO.findByOrderOrderId(Id);
         model.addAttribute("orderDetail", orderDetailEntity);
         System.out.println(Id);
-        return "/admin/list-orderDetail";
+        return "admin/list-orderDetail";
     }
 }

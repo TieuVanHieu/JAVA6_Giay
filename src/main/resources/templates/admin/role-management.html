@@ -13,8 +13,8 @@
 	<main class="app-content">
 		<div class="app-title">
 			<ul class="app-breadcrumb breadcrumb side">
-				<li class="breadcrumb-item active"><a href="#"><b>Sản
-							phẩm giảm giá</b></a></li>
+				<li class="breadcrumb-item active"><a href="#"><b>Quản
+							lý phân quyền</b></a></li>
 			</ul>
 			<div id="clock"></div>
 		</div>
@@ -23,12 +23,6 @@
 				<div class="tile">
 					<div class="tile-body">
 						<div class="row element-button">
-							<div class="col-sm-2">
-
-								<a class="btn btn-add btn-sm" href="/admin/form-discount"
-									title="Thêm"><i class="fas fa-plus"></i> Thêm sản phẩm giảm
-									giá</a>
-							</div>
 							<div class="col-sm-2">
 								<a class="btn btn-delete btn-sm print-file" type="button"
 									title="In" onclick="myApp.printTable()"><i
@@ -53,18 +47,12 @@
 						<table class="table table-hover table-bordered" id="sampleTable">
 							<thead>
 								<tr>
-									<th>Mã giảm giá</th>
-									<th>Tên sản phẩm</th>
-									<th>Hình ảnh</th>
-									<th>Giảm giá</th>
-									<th>Ngày bắt đầu</th>
-									<th>Ngày kết thúc</th>
-									<th>Chức năng</th>
+									<th>Tên Tài Khoản</th>
+									<th>Phân Quyền</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<c:forEach var="discount" items="1">
 										<td>1</td>
 										<td>1</td>
 										<td><img src="/img/1" class="img-card-person"></td>
@@ -79,7 +67,6 @@
 											href="/discount/edit/1"> <i class="fas fa-edit"></i>
 										</a></td>
 								</tr>
-								</c:forEach>
 							</tbody>
 						</table>
 					</div>

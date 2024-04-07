@@ -18,6 +18,24 @@
 			</ul>
 			<div id="clock"></div>
 		</div>
+		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${messageSuccess}">
+			<strong>Success!</strong> <span th:text="${messageSuccess}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-dismissible fade show" style="background-color: red;" role="alert" th:if="${messageDanger}">
+			<strong>Error!</strong> <span th:text="${messageDanger}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${messageWarning}">
+			<strong>Warning!</strong> <span th:text="${messageWarning}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="tile">
@@ -25,7 +43,7 @@
 						<div class="row element-button">
 							<div class="col-sm-2">
 
-								<a class="btn btn-add btn-sm" href="size/form-size"
+								<a class="btn btn-add btn-sm" href="/size/form-size"
 									title="Thêm"><i class="fas fa-plus"></i> Tạo mới kích cỡ</a>
 							</div>
 							<div class="col-sm-2">
@@ -63,7 +81,7 @@
 										<td th:text="${size.sizeId}"></td>
 										<td th:text="${size.sizeName}"></td>
 										<td><a class="btn btn-primary btn-sm trash" type="button"
-											title="Xóa" onclick="confirmDelete('${size.sizeId}')"><i
+											title="Xóa" th:href="@{/size/delete/{id}(id=${size.sizeId})}" onclick="return confirmDeleteUser();"><i
 												class="fas fa-trash-alt"></i> </a><a
 											class="btn btn-primary btn-sm edit" type="button"
 											th:href="@{/size/edit/{id}(id=${size.sizeId})}"><i class="fas fa-edit"></i>

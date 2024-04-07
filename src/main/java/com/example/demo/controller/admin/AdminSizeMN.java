@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +51,7 @@ public class AdminSizeMN {
     }
 
     @RequestMapping("/delete/{sizeId}")
-    public String delete(@PathVariable("sizeId") Integer sizeId, RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable("sizeId") Integer sizeId,Model model, RedirectAttributes redirectAttributes) {
         Optional<SizeEntity> sizeOptional = sizeEntityDAO.findById(sizeId);
         
         if (sizeOptional.isPresent()) {
@@ -59,11 +60,14 @@ public class AdminSizeMN {
             // Kiểm tra xem có sản phẩm nào liên kết với kích thước không
             if (!sizeEntity.getProductDetail().isEmpty()) {
                 // Nếu có, không xóa và thông báo lỗi
-                redirectAttributes.addFlashAttribute("error", "Không thể xóa kích thước này vì có sản phẩm đang liên kết với nó.");
+                // redirectAttributes.addFlashAttribute("error", "Không thể xóa kích thước này vì có sản phẩm đang liên kết với nó.");
+                model.addAttribute("messageDanger", "Không thể xóa kích thước này vì có sản phẩm đang liên kết với nó.");
+                return "forward:/size";
             } else {
                 // Nếu không có sản phẩm liên kết, xóa kích thước
                 sizeEntityDAO.deleteById(sizeId);
-                redirectAttributes.addFlashAttribute("success", "Kích thước đã được xóa thành công.");
+                model.addAttribute("messageSuccess", "Xóa thành công !");
+                return "forward:/size";
             }
         } else {
             redirectAttributes.addFlashAttribute("error", "Không tìm thấy kích thước.");
@@ -71,4 +75,6 @@ public class AdminSizeMN {
         
         return "redirect:/size";
     }
+
+    
 }

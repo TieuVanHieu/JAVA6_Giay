@@ -40,10 +40,11 @@ public class ProductDetailEntity {
     ColorEntity color;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "productDetial")
+    @OneToMany(mappedBy = "productDetail")
     List<CartDetailEntity> cartDetail;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "productDetial")
+    @OneToMany(mappedBy = "productDetail")
     List<OrderDetailEntity> orderDetail;
 }
+

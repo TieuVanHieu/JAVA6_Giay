@@ -38,7 +38,7 @@ public class OrderEntity {
 
     @ManyToOne
     @JoinColumn(name = "userName")
-    AccountEntity account;;
+    AccountEntity account;
 
     @JsonIgnore
     @OneToMany(mappedBy = "order")

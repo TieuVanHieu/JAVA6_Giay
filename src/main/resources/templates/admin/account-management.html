@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>Quản Lý Tài Khoản</title>
+<title>Thông Tin Tài Khoản Khách Hàng</title>
 <div th:replace="admin/layout/head :: head"></div>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -13,8 +13,7 @@
 	<main class="app-content">
 		<div class="app-title">
 			<ul class="app-breadcrumb breadcrumb side">
-				<li class="breadcrumb-item active"><a href="#"><b>Quản
-							lý Phân Loại</b></a></li>
+				<li class="breadcrumb-item active"><a href="#"><b>Thông Tin Khách Hàng</b></a></li>
 			</ul>
 			<div id="clock"></div>
 		</div>
@@ -51,7 +50,6 @@
 									<th>Họ Và Tên</th>
 									<th>Email</th>
 									<th>Số Điện Thoại</th>
-									<th>Chức năng</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -61,12 +59,12 @@
 										<td th:text="${account.fullName}"></td>
 										<td th:text="${account.email}"></td>
 										<td th:text="${account.phone}"></td>
-										<td class="table-td-center">
+										<!-- <td class="table-td-center">
 										 <a class="btn btn-primary btn-sm edit"
 											type="button" th:href="@{/edit/{id}(id=${account.userName})}"> <i
 												class="fas fa-edit"></i>
 										</a>
-										</td>
+										</td> -->
 								</tr>
 								
 							</tbody>
