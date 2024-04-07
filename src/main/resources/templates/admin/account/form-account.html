@@ -24,17 +24,26 @@
 					<div class="tile-body">
 						<div class="row element-button"></div>
 					</div>
-					<form:form class="row" action="/account/update"
-						modelAttribute="account">
+					<form class="row" method="POST" th:action="@{/edit/{username}(username=${user.userName})}" th:object="${account}"
+						>
 						<div class="form-group col-md-4">
-							<label class="control-label">User Name</label>
-							<form:input path="userName" class="form-control" readonly="True" />
-							<form:input path="userId" class="form-control" hidden="True" />
+							<label class="control-label">Họ và Tên</label>
+							<input name="fullName" th:field="*{fullName}" class="form-control"/>
+							
 						</div>
+						<div class="form-group col-md-4">
+							<label class="control-label">Email</label>
+							<input name="email" th:field="*{email}" class="form-control"/>
+							
+						</div>
+						<div class="form-group col-md-4">
+							<label class="control-label">Số điện thoại</label>
+							<input name="phone" th:field="*{phone}" class="form-control"/>
+							
+						</div>
+						<!-- <input path="passWord" class="form-control" hidden="True" /> -->
 
-						<form:input path="passWord" class="form-control" hidden="True" />
-
-						<div class="form-group  col-md-4">
+						<!-- <div class="form-group  col-md-4">
 							<label for="exampleSelect1" class="control-label">Phân
 								quyền</label>
 							<div class="form-check">
@@ -49,15 +58,15 @@
 								<label class="form-check-label" for="flexRadioDefault2">
 									Người dùng </label>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="form-group col-md-12">
-							<button class="btn btn-save" formaction="/account/update">Lưu
+							<button class="btn btn-save">Lưu
 								lại</button>
 							<!-- <button class="btn btn-save" formaction="/discount/update">Cập nhật</button> -->
-							<a class="btn btn-cancel" href="/account">Hủy bỏ</a>
+							<a class="btn btn-cancel" th:href="@{/account}">Hủy bỏ</a>
 						</div>
-					</form:form>
+					</form>
 
 				</div>
 			</div>
@@ -65,10 +74,10 @@
 	</main>
 
 
-	<!--
-  MODAL
+	
+  <!-- MODAL
 -->
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+	<!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle"
 		data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog modal-dialog-centered" role="document">
@@ -94,10 +103,10 @@
 				<div class="modal-footer"></div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!--
-MODAL
--->
+MODAL -->
+
 
 
 

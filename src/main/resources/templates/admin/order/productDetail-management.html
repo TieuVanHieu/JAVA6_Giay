@@ -13,7 +13,7 @@
 	<main class="app-content">
 		<div class="app-title">
 			<ul class="app-breadcrumb breadcrumb side">
-				<li class="breadcrumb-item active"><a href="#"><b>Danh
+				<li class="breadcrumb-item active"><a href="/productDetail"><b>Danh
 							sách chi tiết sản phẩm</b></a></li>
 			</ul>
 			<div id="clock"></div>
@@ -26,7 +26,7 @@
 							<div class="col-sm-2">
 
 								<a class="btn btn-add btn-sm"
-									href="/admin/form-productDetail" title="Thêm"><i
+									href="/productDetail/form-productDetail" title="Thêm"><i
 									class="fas fa-plus"></i> Tạo mới sản phẩm</a>
 							</div>
 							<div class="col-sm-2">
@@ -70,23 +70,25 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="productDetail" items="${productDetail1}">
-									<tr>
-										<td>${productDetail.productDetailId}</td>
-										<td>${productDetail.product.productName}</td>
-										<td>${productDetail.quantity}</td>
-										<td>${productDetail.size.sizeName}</td>
-										<td>${productDetail.color.colorName}</td>
+								<!-- <c:forEach var="productDetail" items="${productDetail1}"> -->
+									<tr th:each="productDetail1, loopStatus : ${productDetail1}">
+										<td th:text="${productDetail1.productDetailId}"></td>
+										<td  th:text="${productDetail1.product.productName}"></td>
+										<td th:text="${productDetail1.quantity}"></td>
+										<td th:text="${productDetail1.size.sizeName}"></td>
+										<td th:text="${productDetail1.color.colorName}"></td>
 										<td><a class="btn btn-primary btn-sm trash" type="button"
 											title="Xóa"
 											onclick="confirmDelete('${productDetail.productDetailId}')"><i
-												class="fas fa-trash-alt"></i> </a> <a
-											class="btn btn-primary btn-sm edit" type="button"
-											href="/productDetail/edit/${productDetail.productDetailId}">
-												<i class="fas fa-edit"></i>
-										</a>
+												class="fas fa-trash-alt"></i> </a> 
+												<a class="btn btn-primary btn-sm edit" type="button"
+													th:href="@{/productDetail/edit/{id}(id=${productDetail1.productDetailId})}"><i
+														class="fas fa-edit"></i>
+												</a>
+									
+										
 									</tr>
-								</c:forEach>
+								<!-- </c:forEach> -->
 							</tbody>
 						</table>
 					</div>

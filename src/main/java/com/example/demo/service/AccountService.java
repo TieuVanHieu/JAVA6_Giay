@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+import java.util.Optional;
 
 import com.example.demo.model.AccountEntity;
 
@@ -8,6 +10,7 @@ import com.example.demo.model.AccountEntity;
  */
 public interface AccountService {
 
-    AccountEntity findById(String username);   
 
+    List<AccountEntity> findAll();
+    Optional<AccountEntity> findById(String userName);
 }

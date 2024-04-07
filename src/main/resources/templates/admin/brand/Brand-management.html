@@ -19,6 +19,24 @@
 			</ul>
 			<div id="clock"></div>
 		</div>
+		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${messageSuccess}">
+			<strong>Success!</strong> <span th:text="${messageSuccess}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-dismissible fade show" style="background-color: red;" role="alert" th:if="${messageDanger}">
+			<strong>Error!</strong> <span th:text="${messageDanger}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${messageWarning}">
+			<strong>Warning!</strong> <span th:text="${messageWarning}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="tile">
@@ -26,7 +44,7 @@
 						<div class="row element-button">
 							<div class="col-sm-2">
 
-								<a class="btn btn-add btn-sm" href="/admin/form-brand"
+								<a class="btn btn-add btn-sm" href="/brand/form-brand"
 									title="Thêm"><i class="fas fa-plus"></i> Tạo mới thương
 									hiệu</a>
 							</div>
@@ -56,19 +74,23 @@
 								<tr>
 									<th>ID thương hiệu</th>
 									<th>Tên sản phẩm</th>
+									<th>Chức Năng</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="brand" items="${brand}">
-									<tr>
-										<td>${brand.brandId}</td>
-										<td>${brand.brandName}</td>
-										<td><a class="btn btn-primary btn-sm edit" type="button"
-											href="/brand/edit/${brand.brandId}"> <i
+								<!-- <c:forEach var="brand" items="${brand}"> -->
+									<tr th:each="brand, loopStatus : ${brand}">
+										<td th:text="${brand.brandId}"></td>
+										<td th:text="${brand.brandName}"></td>
+										<td><a class="btn btn-primary btn-sm trash" type="button"
+											title="Xóa" th:href="@{/brand/delete/{id}(id=${brand.brandId})}" onclick="return confirmDeleteUser();"><i
+												class="fas fa-trash-alt"></i> </a>
+											<a class="btn btn-primary btn-sm edit" type="button"
+											th:href="@{/brand/edit/{id}(id=${brand.brandId})}"><i
 												class="fas fa-edit"></i>
 										</a>
 									</tr>
-								</c:forEach>
+								<!-- </c:forEach> -->
 							</tbody>
 						</table>
 					</div>

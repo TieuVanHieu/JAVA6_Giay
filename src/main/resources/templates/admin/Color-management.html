@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<meta charset="UTF-8">
-<title>Quản Lý Chi Tiết Đơn Hàng</title>
-<div th:replace="admin/layout/head :: head"></div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <div th:replace="admin/layout/head :: head"></div>
 <body onload="time()" class="app sidebar-mini rtl">
 	<!-- Navbar-->
-	<header th:replace="admin/layout/header :: header"></header>
-	<!-- Sidebar menu-->
-	<div th:replace="admin/layout/left-menu :: left-menu"></div>
-	<!-- Sidebar menu-->
+    <header th:replace="admin/layout/header :: header"></header>
+    <!-- Sidebar menu-->
+    <div th:replace="admin/layout/left-menu :: left-menu"></div>
+    <!-- Sidebar menu-->
 
 	<main class="app-content">
 		<div class="app-title">
 			<ul class="app-breadcrumb breadcrumb side">
 				<li class="breadcrumb-item active"><a href="#"><b>Danh
-							sách chi tiết đơn hàng</b></a></li>
+							sách màu</b></a></li>
 			</ul>
 			<div id="clock"></div>
 		</div>
@@ -23,6 +21,11 @@
 				<div class="tile">
 					<div class="tile-body">
 						<div class="row element-button">
+							<div class="col-sm-2">
+
+								<a class="btn btn-add btn-sm" href="/color/form-color"
+									title="Thêm"><i class="fas fa-plus"></i> Tạo mới màu</a>
+							</div>
 							<div class="col-sm-2">
 								<a class="btn btn-delete btn-sm print-file" type="button"
 									title="In" onclick="myApp.printTable()"><i
@@ -47,35 +50,24 @@
 						<table class="table table-hover table-bordered" id="sampleTable">
 							<thead>
 								<tr>
-									<th>STT</th>
-									<th>Tên sản phẩm</th>
-									<th>Hãng</th>
-									<th>Số lượng</th>
-									<th>Kích cỡ</th>
-									<th>Màu sắc</th>
-									<th>Giá của mỗi sản phẩm</th>
-									<th>Giá tiền sản phẩm</th>
+									<th>ID màu</th>
+									<th>Tên màu</th>
 								</tr>
 							</thead>
 							<tbody>
-								
-									<tr th:each="orderDetail, stt : ${orderDetail}">
-										<td th:text="*{stt.index + 1}"></td>
-										<td th:text="${orderDetail.productDetail.product.productName}"></td>
-										<td th:text="${orderDetail.productDetail.product.brand.brandName}"></td>
-										<td th:text="${orderDetail.quantity}"></td>
-										<td th:text="${orderDetail.productDetail.size.sizeName}"></td>
-										<td th:text="${orderDetail.productDetail.color.colorName}"></td>
-										<td>
-											<span
-												th:text="${#numbers.formatDecimal(orderDetail.productDetail.product.productPrice,0,'COMMA',0,'POINT')} + ' VND'"></span>
-										</td>
-										<td>
-											<span
-												th:text="${#numbers.formatDecimal(orderDetail.price,0,'COMMA',0,'POINT')} + ' VND'"></span>
-										</td>
+								<!-- <c:forEach var="color" items="${color}"> -->
+									<tr th:each="color, loopStatus : ${color}">
+										<td th:text="${color.colorId}"></td>
+										<td th:text="${color.colorName}"></td>
+										<td><a class="btn btn-primary btn-sm edit" type="button"
+											th:href="@{/color/edit/{id}(id=${color.colorId})}"><i
+												class="fas fa-edit"></i>
+												
+										</a>
+									</td>
+										
 									</tr>
-								
+								<!-- </c:forEach> -->
 							</tbody>
 						</table>
 					</div>
@@ -86,7 +78,7 @@
 
 
 
-	<div th:replace="admin/layout/script2 :: script2"></div>
+    <div th:replace="admin/layout/script2 :: script2"></div>
 	<script type="text/javascript">
         $('#sampleTable').DataTable();
         //Thời Gian
@@ -131,12 +123,12 @@
     }
     </script>
 	<script>
-	function confirmDelete(productDetailId) {
+	function confirmDelete(colorId) {
 	    var result = confirm("Bạn có chắc chắn muốn xóa không?");
 	    if (result) {
 	        // Sử dụng AJAX để gửi yêu cầu xóa
 	        var xhr = new XMLHttpRequest();
-	        xhr.open("GET", "/productDetail/delete/" + productDetailId, true);
+	        xhr.open("GET", "/color/delete/" + colorId, true);
 	        xhr.onreadystatechange = function () {
 	            if (xhr.readyState == 4 && xhr.status == 200) {
 	                // Xóa thành công, có thể cập nhật giao diện hoặc thông báo thành công tại đây

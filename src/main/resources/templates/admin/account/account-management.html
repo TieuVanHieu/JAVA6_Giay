@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>Quản Lý Tài Khoản</title>
+<title>Thông Tin Tài Khoản Khách Hàng</title>
 <div th:replace="admin/layout/head :: head"></div>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -13,8 +13,7 @@
 	<main class="app-content">
 		<div class="app-title">
 			<ul class="app-breadcrumb breadcrumb side">
-				<li class="breadcrumb-item active"><a href="#"><b>Quản
-							lý Phân Loại</b></a></li>
+				<li class="breadcrumb-item active"><a href="#"><b>Thông Tin Khách Hàng</b></a></li>
 			</ul>
 			<div id="clock"></div>
 		</div>
@@ -47,31 +46,29 @@
 						<table class="table table-hover table-bordered" id="sampleTable">
 							<thead>
 								<tr>
-									<th style="width: 65px">Số Thứ Tự</th>
-									<th>Tên người dùng</th>
-									<th>Phân quyền</th>
-									<th>Chức năng</th>
+									<th style="width: 65px">Tên tài khoản</th>
+									<th>Họ Và Tên</th>
+									<th>Email</th>
+									<th>Số Điện Thoại</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<c:forEach var="account" items="${user}" varStatus="loop">
-										<td>${account.userId}</td>
-										<td>${account.userName}</td>
-										<td>${account.userRole ? 'Admin' : 'Khách hàng'}</td>
-										<td class="table-td-center">
-											<!-- <a
-																	class="btn btn-primary btn-sm trash" type="button"
-																	title="Xóa" onclick="confirmDelete('${account.userId}')"> <i
-																		class="fas fa-trash-alt"></i>
-																</a>  --> <a class="btn btn-primary btn-sm edit"
-											type="button" href="/account/edit/${account.userId}"> <i
+								<tr th:each="account, loopStatus : ${account}">
+			
+										<td th:text="${account.userName}"></td>
+										<td th:text="${account.fullName}"></td>
+										<td th:text="${account.email}"></td>
+										<td th:text="${account.phone}"></td>
+										<!-- <td class="table-td-center">
+										 <a class="btn btn-primary btn-sm edit"
+											type="button" th:href="@{/edit/{id}(id=${account.userName})}"> <i
 												class="fas fa-edit"></i>
 										</a>
-										</td>
+										</td> -->
 								</tr>
-								</c:forEach>
+								
 							</tbody>
+							
 						</table>
 					</div>
 				</div>

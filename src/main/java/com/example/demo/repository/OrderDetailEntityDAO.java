@@ -15,6 +15,6 @@ public interface OrderDetailEntityDAO extends JpaRepository<OrderDetailEntity, I
     
     
     // List<OrderDetailEntity> findByOrderOrderId(Integer orderId);
-
+    List<OrderDetailEntity> findByOrderOrderId(Integer orderId);
 
 }

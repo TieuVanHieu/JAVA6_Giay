@@ -47,3 +47,4 @@ public class ProductDetailEntity {
     @OneToMany(mappedBy = "productDetail")
     List<OrderDetailEntity> orderDetail;
 }
+

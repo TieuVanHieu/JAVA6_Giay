@@ -88,28 +88,23 @@
 										<th>ID đơn hàng</th>
 										<th>Tên khách hàng</th>
 										<th>Ngày đặt hàng</th>
-										<th>Nhân Viên</th>
-										<th>Tổng tiền</th>
-										<th>Trạng thái</th>
+										<th>Địa Chỉ</th>
 										<th>Xem chi tiết đơn hàng</th>
 										<th>Chức Năng</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="order1" items="${orders}">
-										<tr>
-											<td>${order1.orderId}</td>
-											<td>${order1.shippingInfo[0].shippingName}</td>
-											<td>${order1.orderDate}</td>
-											<td>${order1.user.userId}</td>
-											<td><fmt:formatNumber type="currency" maxFractionDigits="0"
-												value="${order1.totalAmount}" currencyCode="VND" /></td>
-											<td>${order1.orderStatus.statusName}</td> 
-											<td><a class="" type="button" href="/admin/orderDetail/${order1.orderId}"> <i
+									
+										<tr th:each="orders, loopStatus : ${orders}">
+											<td th:text="${orders.orderId}"></td>
+											<td th:text="${orders.account.userName}"></td>
+											<td th:text="${#dates.format(orders.orderDate, 'dd/MM/yyyy')}"></td>
+											<td th:text="${orders.orderAddress}"></td>
+											<td><a class="" type="button" th:href="@{/order/orderDetail/{Id}(Id=${orders.orderId})}"> <i
 												class="fas fa-list"></i></a></td>
-											<td><a href="/admin/orderStatus/${order1.orderId}" class="btn btn-success" type="button">Xác nhận</a></td>	
+											<td><a href="" class="btn btn-success" type="button">Xác nhận</a></td>	
 										</tr>
-									</c:forEach>
+									
 								</tbody>
 							</table>
 						</div>
