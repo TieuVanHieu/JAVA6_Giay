@@ -112,8 +112,8 @@
 					
 						<div class="form-group col-md-4">
 							<label class="control-label" for="category">Loại Giày</label>
-							<select id="category" name="category.categoryId" class="form-control">
-								<option th:each="categoryId : ${categoryIds}" th:value="${categoryId}" th:text="${categoryId}"></option>
+							<select id="category" th:field="*{category.categoryId}" name="category.categoryId" class="form-control">
+								<option th:each="categorys : ${categoryIds}" th:value="${categorys.categoryId}" th:text="${categorys.categoryName}"></option>
 							</select>
 						</div>
 					
@@ -124,8 +124,8 @@
 					
 						<div class="form-group col-md-4">
 							<label class="control-label" for="brand">Hãng</label>
-							<select id="brand" name="brand.brandId" class="form-control">
-								<option th:each="brandId : ${brandIds}" th:value="${brandId}" th:text="${brandId}"></option>
+							<select id="brand" th:field="*{brand.brandId}" name="brand.brandId" class="form-control">
+								<option th:each="brands : ${brandIds}" th:value="${brands.brandId}" th:text="${brands.brandName}"></option>
 							</select>
 						</div>
 					

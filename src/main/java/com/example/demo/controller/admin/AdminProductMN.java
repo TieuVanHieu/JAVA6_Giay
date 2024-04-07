@@ -105,17 +105,17 @@ public class AdminProductMN {
     }
 
     @ModelAttribute("categoryIds")
-    public List<Integer> getAllCategoryIds() {
+    public List<CategoryEntity> getAllCategoryIds() {
         List<CategoryEntity> categories = categoryEntityDAO.findAll();
-        List<Integer> categoryIds = categories.stream().map(CategoryEntity::getCategoryId).collect(Collectors.toList());
-        return categoryIds;
+        // List<Integer> categoryIds = categories.stream().map(CategoryEntity::getCategoryId).collect(Collectors.toList());
+        return categories;
     }
 
     @ModelAttribute("brandIds")
-    public List<Integer> getAllBrandIds() {
+    public List<BrandEntity> getAllBrandIds() {
         List<BrandEntity> brands = brandEntityDAO.findAll();
-        List<Integer> brandIds = brands.stream().map(BrandEntity::getBrandId).collect(Collectors.toList());
-        return brandIds;
+        // List<Integer> brandIds = brands.stream().map(BrandEntity::getBrandId).collect(Collectors.toList());
+        return brands;
     }
 
     @PostMapping("/addCategory")
