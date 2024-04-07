@@ -33,7 +33,7 @@ public class AdminAccountMN {
     @RequestMapping("")
     public String ShowAccount(Model model) {
         List<AccountEntity> AccountEntity = AccountEntityDAO.findAll();
-        model.addAttribute("user", AccountEntity);;
+        model.addAttribute("account", AccountEntity);;
         return "admin/account-management";
     }
 

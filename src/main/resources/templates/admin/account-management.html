@@ -56,17 +56,13 @@
 							</thead>
 							<tbody>
 								<tr th:each="account, loopStatus : ${account}">
-									<!-- <c:forEach var="account" items="${user}" varStatus="loop"> -->
+			
 										<td th:text="${account.userName}"></td>
 										<td th:text="${account.fullName}"></td>
 										<td th:text="${account.email}"></td>
 										<td th:text="${account.phone}"></td>
 										<td class="table-td-center">
-											<!-- <a
-																	class="btn btn-primary btn-sm trash" type="button"
-																	title="Xóa" onclick="confirmDelete('${account.userId}')"> <i
-																		class="fas fa-trash-alt"></i>
-																</a>  --> <a class="btn btn-primary btn-sm edit"
+										 <a class="btn btn-primary btn-sm edit"
 											type="button" th:href="@{/edit/{id}(id=${account.userName})}"> <i
 												class="fas fa-edit"></i>
 										</a>
@@ -74,6 +70,7 @@
 								</tr>
 								
 							</tbody>
+							
 						</table>
 					</div>
 				</div>
