@@ -21,10 +21,12 @@ public String admin() {
 // public String formBrand() {
 // 	return "admin/form-brand";
 // }
-// @RequestMapping("/admin/form-product")
-// public String formProduct() {
-// 	return "admin/form-product";
-// }
+
+
+// /*
+//  * @RequestMapping("/admin/form-product") public String formProduct() { return
+//  * "admin/form-product"; }
+//  */
 // @RequestMapping("/admin/form-productDetail")
 // public String formProductDetail() {
 // 	return "admin/form-productDetail";
@@ -37,10 +39,12 @@ public String admin() {
 // public String formDiscount() {
 // 	return "admin/form-discount";
 // }
-// @RequestMapping("/admin/account-management")
-// public String formAccountMN() {
-// 	return "admin/account-management";
-// }
+
+// //@RequestMapping("/admin/account-management")
+// //public String formAccountMN() {
+// //	return "admin/account/account-management";
+// //}
+
 // @RequestMapping("/admin/Brand-management")
 // public String formBrandMN() {
 // 	return "admin/Brand-management";
@@ -61,10 +65,13 @@ public String admin() {
 // public String formOrderDetailMN() {
 // 	return "admin/orderDetail-management";
 // }
-// @RequestMapping("/admin/product-management")
-// public String formProductMN() {
-// 	return "admin/product-management";
-// }
+
+
+// /*
+//  * @RequestMapping("/admin/product-management") public String formProductMN() {
+//  * return "admin/product-management"; }
+//  */
+
 // @RequestMapping("/admin/productDetail-management")
 // public String formProductDetailMN() {
 // 	return "admin/productDetail-management";
@@ -81,4 +88,10 @@ public String admin() {
 // public String formListOrderDetail() {
 // 	return "admin/list-orderDetail";
 // }
+
+// @RequestMapping("/admin/Color-management")
+// public String ColorManagement() {
+// 	return "admin/Color-management";
+// }
+
 }
