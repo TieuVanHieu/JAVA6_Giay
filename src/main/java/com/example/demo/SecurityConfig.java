@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(username -> {
             try {
-                AccountEntity user = accountService.findById(username);
+                AccountEntity user = accountService.findById(username).get();
                 String password = pe.encode(user.getPassWord());
                 String[] roles = user.getAuthorities().stream()
                     .map(er -> er.getRole().getRoleId())
