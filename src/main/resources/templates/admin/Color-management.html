@@ -55,20 +55,19 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="color" items="${color}">
-									<tr>
-										<td>${color.colorId}</td>
-										<td>${color.colorName}</td>
-										<td><a class="btn btn-primary btn-sm trash" type="button"
-											title="Xóa"
-											onclick="confirmDelete('${color.colorId}')"> <i
-												class="fas fa-trash-alt"></i>
-										</a> <a class="btn btn-primary btn-sm edit" type="button"
-											href="/color/edit/${color.colorId}"> <i
+								<!-- <c:forEach var="color" items="${color}"> -->
+									<tr th:each="color, loopStatus : ${color}">
+										<td th:text="${color.colorId}"></td>
+										<td th:text="${color.colorName}"></td>
+										<td><a class="btn btn-primary btn-sm edit" type="button"
+											th:href="@{/color/edit/{id}(id=${color.colorId})}"><i
 												class="fas fa-edit"></i>
+												
 										</a>
+									</td>
+										
 									</tr>
-								</c:forEach>
+								<!-- </c:forEach> -->
 							</tbody>
 						</table>
 					</div>

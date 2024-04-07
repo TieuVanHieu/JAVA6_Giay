@@ -70,23 +70,24 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="productDetail" items="${productDetail1}">
-									<tr>
-										<td>${productDetail.productDetailId}</td>
-										<td>${productDetail.product.productName}</td>
-										<td>${productDetail.quantity}</td>
-										<td>${productDetail.size.sizeName}</td>
-										<td>${productDetail.color.colorName}</td>
+								<!-- <c:forEach var="productDetail" items="${productDetail1}"> -->
+									<tr th:each="productDetail1, loopStatus : ${productDetail1}">
+										<td th:text="${productDetail1.productDetailId}"></td>
+										<td  th:text="${productDetail1.product.productName}"></td>
+										<td th:text="${productDetail1.quantity}"></td>
+										<td th:text="${productDetail1.size.sizeName}"></td>
+										<td th:text="${productDetail1.color.colorName}"></td>
 										<td><a class="btn btn-primary btn-sm trash" type="button"
 											title="Xóa"
 											onclick="confirmDelete('${productDetail.productDetailId}')"><i
 												class="fas fa-trash-alt"></i> </a> <a
 											class="btn btn-primary btn-sm edit" type="button"
-											href="/productDetail/edit/${productDetail.productDetailId}">
+											th:href="@{/productDetail/edit/${productDetail.productDetailId}}">
 												<i class="fas fa-edit"></i>
 										</a>
+										
 									</tr>
-								</c:forEach>
+								<!-- </c:forEach> -->
 							</tbody>
 						</table>
 					</div>

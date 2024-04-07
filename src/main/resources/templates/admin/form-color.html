@@ -90,22 +90,21 @@
                                     <div class="tile">
                                         <h3 class="tile-title">Tạo Màu</h3>
                                         <div class="tile-body">
-                                            <form:form action="/color/create" modelAttribute="color"
-                                                enctype="multipart/form-data">
-                                                <div class="row">
-                                                    <div class="form-group  col-md-4">
-                                                        <label class="control-label">ID Màu</label>
-                                                        <form:input path="colorId" class="form-control"
-                                                        readonly="True" />
-                                                    </div>
-                                                    <div class="form-group  col-md-4">
-                                                        <label class="control-label">Tên Màu</label>
-                                                        <form:input path="colorName" class="form-control" />
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-save">Lưu lại</button>
-                                                <a class="btn btn-cancel" href="/color">Hủy bỏ</a>
-                                            </form:form>
+                                            <form method="POST" th:action="@{/color/create}" th:object="${color}"
+							enctype="multipart/form-data">
+							<div class="row">
+								<div class="form-group  col-md-4">
+									<label class="control-label">ID Màu</label>
+									<input name="colorId" th:field="*{colorId}" class="form-control" readonly="True" />
+								</div>
+								<div class="form-group  col-md-4">
+									<label class="control-label">Tên Màu</label>
+									<input name="colorName" th:field="*{colorName}" class="form-control" />
+								</div>
+							</div>
+							<button class="btn btn-save">Lưu lại</button>
+							<a class="btn btn-cancel" href="/color">Hủy bỏ</a>
+						</form>
                                         </div>
                                        
                                     </div>

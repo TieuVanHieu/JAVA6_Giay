@@ -65,7 +65,7 @@ public class AdminProductDetailMN {
         model.addAttribute("productDetail", productDetailEntity);
         List<ProductDetailEntity> productDetailEntity1 = productDetailEntityDAO.findAll();
         model.addAttribute("productDetail1", productDetailEntity1);
-        return "/admin/list-orderDetail";
+        return "/admin/productDetail-management";
     }
 
     @RequestMapping("/form-productDetail")
@@ -80,7 +80,7 @@ public class AdminProductDetailMN {
         List<ProductDetailEntity> productDetailEntity1 = productDetailEntityDAO.findByProductProductId(Id);
         model.addAttribute("productDetail1", productDetailEntity1);
         System.out.println(Id);
-        return "admin/list-orderDetail";
+        return "admin/productDetail-management";
     }
 
 
