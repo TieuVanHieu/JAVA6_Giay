@@ -91,49 +91,28 @@
 			<div class="col-md-12">
 				<div class="tile">
 					<h3 class="tile-title">Tạo mới chi tiết sản phẩm</h3>
-					<form:form class="row" action="/productDetail"
-						modelAttribute="productDetail" enctype="multipart/form-data">
-						<div class="form-group col-md-4">
+					<form class="row" method="POST" th:action="@{/productDetail/create}" th:object="${productDetail1}" enctype="multipart/form-data">
+						 <div class="form-group col-md-4">
 							<label class="control-label">Mã sản phẩm</label>
-							<form:input path="productDetailId" class="form-control"
-								readonly="True" />
-							<!-- <input class="form-control"
-												readonly="" /> -->
+							<input name="productDetailId"  class="form-control" readonly="True" />
 						</div>
 
 						<div class="form-group col-md-4">
 							<label class="control-label">Tên sản phẩm</label>
-							<form:input path="product.productName" class="form-control" />
-							<!-- <input class="form-control"
-												readonly="" /> -->
+							<input path="product.productName" class="form-control" />
 						</div>
 
 
 						<div class="form-group col-md-4">
 							<label class="control-label">Kích cỡ</label>
-							<!-- <form:select path="size" class="form-control">
-													<form:options items="${SizeIds}" lable="SizeName"/>
-												</form:select> -->
 							<form:select path="size.sizeName" class="form-control">
 								<form:options items="${SizeIds}" />
 							</form:select>
-							<!-- <input class="form-control"
-												readonly="" /> -->
 						</div>
-						<!-- <div class="form-group col-md-4">
-												<label for="category_id">Danh mục</label>
-												<select path="category.categoryId" class="form-control">
-													<options items="${categoryIds}" />
-												</select>
-												<select>
-													<option items="">
-												</select>
-											</div> -->
+						
 						<div class="form-group col-md-4">
 							<label class="control-label">Số Lượng</label>
 							<form:input path="quantity" class="form-control" type="number" />
-							<!-- <input class="form-control"
-												type="number" /> -->
 						</div>
 						<div class="form-group col-md-4">
 							<label class="control-label">Màu Sắc</label>
@@ -152,7 +131,7 @@
 							<a class="btn btn-cancel" href="/productDetail">Hủy bỏ</a>
 						</div>
 						<h1>${message}</h1>
-					</form:form>
+					</form>
 				</div>
 			</div>
 		</div>

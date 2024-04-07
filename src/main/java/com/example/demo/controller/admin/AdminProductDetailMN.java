@@ -83,14 +83,14 @@ public class AdminProductDetailMN {
         return "admin/productDetail-management";
     }
 
-
+    
     @RequestMapping("/edit/{productDetailId}")
     public String edit(Model model, @PathVariable("productDetailId") Integer productDetailId){
             ProductDetailEntity productDetailEntity = productDetailEntityDAO.findById(productDetailId).get();
             model.addAttribute("productDetail", productDetailEntity);
             List<ProductDetailEntity> productDetailEntity1 = productDetailEntityDAO.findAll();
             model.addAttribute("productDetail1", productDetailEntity1);
-            return "admin/form-productDetail";
+            return "/admin/form-productDetail";
     }
 
 
