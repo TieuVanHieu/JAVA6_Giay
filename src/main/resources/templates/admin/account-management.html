@@ -47,30 +47,32 @@
 						<table class="table table-hover table-bordered" id="sampleTable">
 							<thead>
 								<tr>
-									<th style="width: 65px">Số Thứ Tự</th>
-									<th>Tên người dùng</th>
-									<th>Phân quyền</th>
+									<th style="width: 65px">Tên tài khoản</th>
+									<th>Họ Và Tên</th>
+									<th>Email</th>
+									<th>Số Điện Thoại</th>
 									<th>Chức năng</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<tr th:each="account, loopStatus : ${account}">
 									<!-- <c:forEach var="account" items="${user}" varStatus="loop"> -->
-										<td>${account.userId}</td>
-										<td>${account.userName}</td>
-										<td>${account.userRole ? 'Admin' : 'Khách hàng'}</td>
+										<td th:text="${account.userName}"></td>
+										<td th:text="${account.fullName}"></td>
+										<td th:text="${account.email}"></td>
+										<td th:text="${account.phone}"></td>
 										<td class="table-td-center">
 											<!-- <a
 																	class="btn btn-primary btn-sm trash" type="button"
 																	title="Xóa" onclick="confirmDelete('${account.userId}')"> <i
 																		class="fas fa-trash-alt"></i>
 																</a>  --> <a class="btn btn-primary btn-sm edit"
-											type="button" href="/account/edit/${account.userId}"> <i
+											type="button" th:href="@{/edit/{id}(id=${account.userName})}"> <i
 												class="fas fa-edit"></i>
 										</a>
 										</td>
 								</tr>
-								</c:forEach>
+								
 							</tbody>
 						</table>
 					</div>

@@ -25,7 +25,7 @@
 						<div class="row element-button">
 							<div class="col-sm-2">
 
-								<a class="btn btn-add btn-sm" href="admin/form-size"
+								<a class="btn btn-add btn-sm" href="size/form-size"
 									title="Thêm"><i class="fas fa-plus"></i> Tạo mới kích cỡ</a>
 							</div>
 							<div class="col-sm-2">
@@ -54,21 +54,22 @@
 								<tr>
 									<th>ID kích cỡ</th>
 									<th>Tên kích cỡ</th>
+									<th>Chức Năng</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="size" items="${size}">
-									<tr>
-										<td>${size.sizeId}</td>
-										<td>${size.sizeName}</td>
+								<!-- <c:forEach var="size" items="${size}"> -->
+									<tr th:each="size, loopStatus : ${size}">
+										<td th:text="${size.sizeId}"></td>
+										<td th:text="${size.sizeName}"></td>
 										<td><a class="btn btn-primary btn-sm trash" type="button"
 											title="Xóa" onclick="confirmDelete('${size.sizeId}')"><i
-												class="fas fa-trash-alt"></i> </a> <a
+												class="fas fa-trash-alt"></i> </a><a
 											class="btn btn-primary btn-sm edit" type="button"
-											href="/size/edit/${size.sizeId}"> <i class="fas fa-edit"></i>
+											th:href="@{/size/edit/{id}(id=${size.sizeId})}"><i class="fas fa-edit"></i>
 										</a>
 									</tr>
-								</c:forEach>
+								<!-- </c:forEach> -->
 							</tbody>
 						</table>
 					</div>
