@@ -26,7 +26,7 @@
 						<div class="row element-button">
 							<div class="col-sm-2">
 
-								<a class="btn btn-add btn-sm" href="/admin/form-product"
+								<a class="btn btn-add btn-sm" href="/product-admin/form-product"
 									title="Thêm"><i class="fas fa-plus"></i> Tạo mới sản phẩm</a>
 							</div>
 							<div class="col-sm-2">
@@ -57,9 +57,9 @@
 									<th>Tên sản phẩm</th>
 									<th>Mô tả</th>
 									<th>Ảnh</th>
-									<!-- <th>Hãng</th> -->
+									<th>Hãng</th>
 									<th>Giá bán</th>
-									<!-- <th>Loại giày</th> -->
+									<th>Loại giày</th>
 									<th>Chức năng</th>
 									<th>Chi tiết sản phẩm</th>
 								</tr>
@@ -71,20 +71,24 @@
 										<td th:text="${product1.productName}"></td>
 										<td th:text="${product1.productDescription}"></td>
 										<td><img class="img-card-person" th:src="@{|../assets/user/images/products/item/${product1.productImages}|}" alt=""></td>
-										<!-- <td th:text="${product1.brand.brandName}"></td> -->
+										<td th:text="${product1.brand != null ? product1.brand.brandName : ''}"></td>
+
+								
 										<td>
 											<span
 												th:text="${#numbers.formatDecimal(product1.productPrice,0,'COMMA',0,'POINT')} + ' VND'"></span>
 										</td>
-										<!-- <td th:text="${product1.category.categoryName}"></td> -->
-										<td><a class="btn btn-primary btn-sm edit" type="button"
-											href="/product/edit/${product1.productId}"> <i
-												class="fas fa-edit"></i>
-										</a></td>
-										<td><a class="btn btn-primary btn-sm list" type="button"
-											href="/productDetail/form-productDetailId/${product.productId}">
+										<td th:text="${product1.category != null ? product1.category.categoryName : ''}"></td>
+										<td>
+											<a class="btn btn-primary btn-sm edit" type="button" th:href="@{/product-admin/edit/{productId}(productId=${product1.productId})}">
+												<i class="fas fa-edit"></i>
+											</a>
+										</td>
+										<td>
+											<a class="btn btn-primary btn-sm list" type="button" th:href="@{/productDetail/form-productDetailId/{productId}(productId=${product1.productId})}">
 												<i class="fas fa-list"></i>
-										</a></td>
+											</a>
+										</td>
 									</tr>
 								<!-- </c:forEach> -->
 							</tbody>

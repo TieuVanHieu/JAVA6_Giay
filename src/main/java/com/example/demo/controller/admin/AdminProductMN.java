@@ -39,104 +39,103 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @MultipartConfig
-@RequestMapping("/product1")
+@RequestMapping("/product-admin")
 public class AdminProductMN {
-	   @Autowired
-	    ProductService productService;
-	   
-	   @Autowired
-	    ProductEntityDAO productEntityDAO;
-	   
-	   @Autowired
-	    CategoryEntityDAO categoryEntityDAO;
+    @Autowired
+    ProductService productService;
 
-	    @Autowired
-	    BrandEntityDAO brandEntityDAO;
+    @Autowired
+    ProductEntityDAO productEntityDAO;
 
-	    @Autowired
-	    ProductDetailEntityDAO productDetailEntityDAO;
+    @Autowired
+    CategoryEntityDAO categoryEntityDAO;
 
-	    @Autowired
-	    ParamService paramService;
+    @Autowired
+    BrandEntityDAO brandEntityDAO;
 
-	    @Autowired
-	    ServletContext app;
-	   
-	    @RequestMapping({ "" })
-	    public String showProduct1(Model model) {
-	        ProductEntity productEntity = new ProductEntity();
-	        model.addAttribute("product", productEntity);
-	        List<ProductEntity> productEntity1 = productEntityDAO.findAll();
-	        model.addAttribute("product1", productEntity1);
-	        return "/admin/product-management";
-	    }
+    @Autowired
+    ProductDetailEntityDAO productDetailEntityDAO;
 
-	    @RequestMapping("/form-product")
-	    public String ShowPro(Model model) {
-	        List<CategoryEntity> CategoryEntity = categoryEntityDAO.findAll();
-	        model.addAttribute("category", CategoryEntity);
-	        model.addAttribute("product", new ProductEntity());
-	        return "/admin/form-product";
-	    }
+    @Autowired
+    ParamService paramService;
 
-	    @RequestMapping("/edit/{productId}")
-	    public String edit(Model model, @PathVariable("productId") Integer productId) {
-	        ProductEntity productEntity = productEntityDAO.findById(productId).get();
-	        model.addAttribute("product", productEntity);
-	        List<ProductEntity> productEntity1 = productEntityDAO.findAll();
-	        model.addAttribute("product1", productEntity1);
-	        return "/admin/form-product";
-	    }
+    @Autowired
+    ServletContext app;
 
-	    @RequestMapping("/create")
-	    public String create(Model model, @Validated @ModelAttribute("product") ProductEntity productEntity,
-	            BindingResult error,
-	            @RequestParam("picture") MultipartFile multipartFile) throws IllegalStateException, IOException {
-	        try {
-	            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-	            String uploadDir = "/images";
-	            productEntity.setProductImages(fileName);
-	            productEntityDAO.save(productEntity);
-	            paramService.save(multipartFile, uploadDir);
-	            model.addAttribute("product", new ProductEntity());
-	        } catch (Exception e) {
-	        }
-	        return "redirect:/product";
-	    }
+    @RequestMapping({ "" })
+    public String showProduct1(Model model) {
+        ProductEntity productEntity = new ProductEntity();
+        model.addAttribute("product", productEntity);
+        List<ProductEntity> productEntity1 = productEntityDAO.findAll();
+        model.addAttribute("product1", productEntity1);
+        return "admin/product-management";
+    }
 
-	    @ModelAttribute("categoryIds")
-	    public List<Integer> getAllCategoryIds() {
-	        List<CategoryEntity> categories = categoryEntityDAO.findAll();
-	        List<Integer> categoryIds = categories.stream().map(CategoryEntity::getCategoryId).collect(Collectors.toList());
-	        return categoryIds;
-	    }
+    @RequestMapping("/form-product")
+    public String ShowPro(Model model) {
+        List<CategoryEntity> CategoryEntity = categoryEntityDAO.findAll();
+        model.addAttribute("category", CategoryEntity);
+        model.addAttribute("product", new ProductEntity());
+        return "/admin/form-product";
+    }
 
-	    @ModelAttribute("brandIds")
-	    public List<Integer> getAllBrandIds() {
-	        List<BrandEntity> brands = brandEntityDAO.findAll();
-	        List<Integer> brandIds = brands.stream().map(BrandEntity::getBrandId).collect(Collectors.toList());
-	        return brandIds;
-	    }
+    @RequestMapping("/edit/{productId}")
+    public String edit(Model model, @PathVariable("productId") Integer productId) {
+        ProductEntity productEntity = productEntityDAO.findById(productId).get();
+        model.addAttribute("product", productEntity);
+        List<ProductEntity> productEntity1 = productEntityDAO.findAll();
+        model.addAttribute("product1", productEntity1);
+        return "/admin/form-product";
+    }
 
-	    @PostMapping("/addCategory")
-	    public String addCate(@ModelAttribute("category") CategoryEntity categoryEntity) {
-	        categoryEntityDAO.save(categoryEntity);
-	        
-	        return "redirect:/product/form-product";
-	    }
-	    
-	    @PostMapping("/addBrand")
-	    public String addBrand(@ModelAttribute("brand") BrandEntity brandEntity) {
-	        brandEntityDAO.save(brandEntity);
-	        
-	        return "redirect:/product/form-product";
-	    }
-	    
+    @RequestMapping("/create")
+    public String create(Model model, @Validated @ModelAttribute("product") ProductEntity productEntity,
+            BindingResult error,
+            @RequestParam("picture") MultipartFile multipartFile) throws IllegalStateException, IOException {
+        try {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            String uploadDir = "/images";
+            productEntity.setProductImages(fileName);
+            productEntityDAO.save(productEntity);
+            paramService.save(multipartFile, uploadDir);
+            model.addAttribute("product", new ProductEntity());
+        } catch (Exception e) {
+        }
+        return "redirect:/product-admin";
+    }
 
-	    @RequestMapping("/delete/{productId}")
-		public String delete(@PathVariable("productId") Integer productId) {
-			productEntityDAO.deleteById(productId);
-			return "redirect:/admin/product-management";
-		}
+    @ModelAttribute("categoryIds")
+    public List<Integer> getAllCategoryIds() {
+        List<CategoryEntity> categories = categoryEntityDAO.findAll();
+        List<Integer> categoryIds = categories.stream().map(CategoryEntity::getCategoryId).collect(Collectors.toList());
+        return categoryIds;
+    }
 
+    @ModelAttribute("brandIds")
+    public List<Integer> getAllBrandIds() {
+        List<BrandEntity> brands = brandEntityDAO.findAll();
+        List<Integer> brandIds = brands.stream().map(BrandEntity::getBrandId).collect(Collectors.toList());
+        return brandIds;
+    }
+
+    @PostMapping("/addCategory")
+    public String addCate(@ModelAttribute("category") CategoryEntity categoryEntity) {
+        categoryEntityDAO.save(categoryEntity);
+        
+        return "redirect:/product/form-product";
+    }
+    
+    @PostMapping("/addBrand")
+    public String addBrand(@ModelAttribute("brand") BrandEntity brandEntity) {
+        brandEntityDAO.save(brandEntity);
+        
+        return "redirect:/product/form-product";
+    }
+    
+
+    @RequestMapping("/delete/{productId}")
+	public String delete(@PathVariable("productId") Integer productId) {
+		productEntityDAO.deleteById(productId);
+		return "redirect:/admin/product-management";
+	}
 }

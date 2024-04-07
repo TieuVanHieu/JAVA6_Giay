@@ -27,7 +27,7 @@ public class CartDetailEntity {
 
     @ManyToOne
     @JoinColumn(name = "productDetailId")
-    ProductDetailEntity productDetial;
+    ProductDetailEntity productDetail;
 
     @ManyToOne
     @JoinColumn(name = "CartId")

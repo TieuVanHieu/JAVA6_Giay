@@ -29,5 +29,5 @@ public class OrderDetailEntity {
 
     @ManyToOne
     @JoinColumn(name = "productDetailId")
-    ProductDetailEntity productDetial;
+    ProductDetailEntity productDetail;
 }
