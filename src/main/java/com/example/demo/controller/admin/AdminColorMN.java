@@ -51,27 +51,30 @@ public class AdminColorMN {
         colorEntityDAO.save(colorEntity);
         return "redirect:/color";
     }
-
-     @RequestMapping("/delete/{colorId}")
-    public String delete(@PathVariable("colorId") Integer colorId, RedirectAttributes redirectAttributes) {
+    
+    @RequestMapping("/delete/{colorId}")
+    public String delete(@PathVariable("colorId") Integer colorId,Model model, RedirectAttributes redirectAttributes) {
         Optional<ColorEntity> colorOptional = colorEntityDAO.findById(colorId);
         
         if (colorOptional.isPresent()) {
             ColorEntity colorEntity = colorOptional.get();
             
-            // Kiểm tra xem có sản phẩm nào liên kết với kích thước không
+            // Kiểm tra xem có sản phẩm nào liên kết với hãng không
             if (!colorEntity.getProductDetail().isEmpty()) {
                 // Nếu có, không xóa và thông báo lỗi
-                redirectAttributes.addFlashAttribute("error", "Không thể xóa kích thước này vì có sản phẩm đang liên kết với nó.");
+                // redirectAttributes.addFlashAttribute("error", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
+                model.addAttribute("messageDanger", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
+                return "forward:/brand";
             } else {
-                // Nếu không có sản phẩm liên kết, xóa kích thước
+                // Nếu không có sản phẩm liên kết, xóa hãng
                 colorEntityDAO.deleteById(colorId);
-                redirectAttributes.addFlashAttribute("success", "Kích thước đã được xóa thành công.");
+                model.addAttribute("messageSuccess", "Xóa thành công !");
+                return "forward:/brand";
             }
         } else {
-            redirectAttributes.addFlashAttribute("error", "Không tìm thấy kích thước.");
+            redirectAttributes.addFlashAttribute("error", "Không tìm thấy hãng.");
         }
         
-        return "redirect:/color";
+        return "redirect:/brand";
     }
 }
