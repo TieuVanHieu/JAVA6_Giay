@@ -14,7 +14,7 @@
 	<main class="app-content">
 		<div class="app-title">
 			<ul class="app-breadcrumb breadcrumb side">
-				<li class="breadcrumb-item active"><a href="#"><b>Danh
+				<li class="breadcrumb-item active"><a href="/brand"><b>Danh
 							sách thương hiệu</b></a></li>
 			</ul>
 			<div id="clock"></div>
@@ -82,13 +82,15 @@
 									<tr th:each="brand, loopStatus : ${brand}">
 										<td th:text="${brand.brandId}"></td>
 										<td th:text="${brand.brandName}"></td>
-										<td><a class="btn btn-primary btn-sm trash" type="button"
-											title="Xóa" th:href="@{/brand/delete/{id}(id=${brand.brandId})}" onclick="return confirmDeleteUser();"><i
-												class="fas fa-trash-alt"></i> </a>
+										<td>
 											<a class="btn btn-primary btn-sm edit" type="button"
 											th:href="@{/brand/edit/{id}(id=${brand.brandId})}"><i
 												class="fas fa-edit"></i>
 										</a>
+										<a class="btn btn-primary btn-sm trash" type="button"
+											title="Xóa" th:href="@{/brand/delete/{id}(id=${brand.brandId})}" onclick="return confirmDeleteUser();"><i
+												class="fas fa-trash-alt"></i> </a>
+										</td>
 									</tr>
 								<!-- </c:forEach> -->
 							</tbody>

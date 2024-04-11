@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,8 +48,25 @@ public class AdminColorMN {
     }
 
     @RequestMapping("/create")
-    public String create(Model model, @ModelAttribute("color") ColorEntity colorEntity){
+    public String create(Model model, @ModelAttribute("color") ColorEntity colorEntity, BindingResult result) {
+        if (colorEntity.getColorName() == null || colorEntity.getColorName().isEmpty()) {
+            result.rejectValue("colorName", "error.colorEntity", "Tên màu không được để trống");
+            return "/admin/form-color"; // Trả về trang form để người dùng sửa lỗi
+        } else if (!colorEntity.getColorName().matches("^[a-zA-Z]+$")) {
+            result.rejectValue("colorName", "error.colorEntity", "Tên màu phải chứa các ký tự chữ cái");
+            return "/admin/form-color"; // Trả về trang form để người dùng sửa lỗi
+        }
+    
+        // Check for Duplicate Color Name
+        ColorEntity existingColor = colorEntityDAO.findByColorName(colorEntity.getColorName());
+        if (existingColor != null) {
+            result.rejectValue("colorName", "error.colorEntity", "Tên màu đã tồn tại, vui lòng chọn tên khác");
+            return "/admin/form-color"; // Trả về trang form để người dùng sửa lỗi
+        }
+    
+        // Nếu không có lỗi (tên màu không trùng) tiến hành lưu entity
         colorEntityDAO.save(colorEntity);
+    
         return "redirect:/color";
     }
     
@@ -63,7 +81,7 @@ public class AdminColorMN {
             if (!colorEntity.getProductDetail().isEmpty()) {
                 // Nếu có, không xóa và thông báo lỗi
                 // redirectAttributes.addFlashAttribute("error", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
-                model.addAttribute("messageDanger", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
+                model.addAttribute("messageDanger", "Không thể xóa màu này vì có sản phẩm đang liên kết với nó.");
                 return "forward:/brand";
             } else {
                 // Nếu không có sản phẩm liên kết, xóa hãng

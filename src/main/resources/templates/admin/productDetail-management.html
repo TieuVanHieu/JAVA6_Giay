@@ -77,15 +77,17 @@
 										<td th:text="${productDetail1.quantity}"></td>
 										<td th:text="${productDetail1.size.sizeName}"></td>
 										<td th:text="${productDetail1.color.colorName}"></td>
-										<td><a class="btn btn-primary btn-sm trash" type="button"
-											title="Xóa"
-											onclick="confirmDelete('${productDetail.productDetailId}')"><i
-												class="fas fa-trash-alt"></i> </a> 
-												<a class="btn btn-primary btn-sm edit" type="button"
+										<td>
+											<a class="btn btn-primary btn-sm edit" type="button"
 													th:href="@{/productDetail/edit/{id}(id=${productDetail1.productDetailId})}"><i
 														class="fas fa-edit"></i>
 												</a>
 									
+											<a class="btn btn-primary btn-sm trash" type="button"
+											title="Xóa"
+											onclick="confirmDelete('${productDetail.productDetailId}')"><i
+												class="fas fa-trash-alt"></i> </a> 
+												
 										
 									</tr>
 								<!-- </c:forEach> -->

@@ -73,6 +73,11 @@
 	transform: rotate(-45deg);
 	margin-top: -2px;
 }
+.button-container {
+    display: flex; /* Sử dụng flexbox để căn chỉnh các nút */
+    gap: 10px; /* Tạo khoảng cách 10px giữa các nút */
+}
+
 </style>
 	<!-- Navbar-->
 	<header th:replace="admin/layout/header :: header"></header>
@@ -101,10 +106,14 @@
 							<div class="form-group  col-md-4">
 								<label class="control-label">Tên Loại Giày</label>
 								<input name="categoryName" th:field="*{categoryName}" class="form-control" />
+								<div th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}"></div>
 							</div>
 						</div>
-						<button class="btn btn-save">Lưu lại</button>
-						<a class="btn btn-cancel" href="/category">Hủy bỏ</a>
+						<div class="button-container">
+							<button class="btn btn-actv">Lưu lại</button>
+							<a class="btn btn-danger" href="/category">Hủy bỏ</a>
+							<a class="btn btn-warning warning-alert-left-top" href="/category/form-category">Làm mới</a>
+						</div>
 					</form>
 					</div>
 

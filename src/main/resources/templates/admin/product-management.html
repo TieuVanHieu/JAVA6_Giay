@@ -5,19 +5,34 @@
 <div th:replace="admin/layout/head :: head"></div>
 
 <body onload="time()" class="app sidebar-mini rtl">
-		<!-- Navbar-->
-		<header th:replace="admin/layout/header :: header"></header>
-		<!-- Sidebar menu-->
-		<div th:replace="admin/layout/left-menu :: left-menu"></div>
-		<!-- Sidebar menu-->
-
+	<header th:replace="admin/layout/header :: header"></header>
+	<div th:replace="admin/layout/left-menu :: left-menu"></div>
 	<main class="app-content">
 		<div class="app-title">
 			<ul class="app-breadcrumb breadcrumb side">
-				<li class="breadcrumb-item active"><a href="#"><b>Danh
+				<li class="breadcrumb-item active"><a href="/product-admin"><b>Danh
 							sách sản phẩm</b></a></li>
 			</ul>
 			<div id="clock"></div>
+		</div>
+		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${messageSuccess}">
+			<strong>Success!</strong> <span th:text="${messageSuccess}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-dismissible fade show" style="background-color: red;" role="alert"
+			th:if="${messageDanger}">
+			<strong>Error!</strong> <span th:text="${messageDanger}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${messageWarning}">
+			<strong>Warning!</strong> <span th:text="${messageWarning}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
@@ -26,28 +41,26 @@
 						<div class="row element-button">
 							<div class="col-sm-2">
 
-								<a class="btn btn-add btn-sm" href="/product-admin/form-product"
-									title="Thêm"><i class="fas fa-plus"></i> Tạo mới sản phẩm</a>
+								<a class="btn btn-add btn-sm" href="/product-admin/form-product" title="Thêm"><i
+										class="fas fa-plus"></i> Tạo mới sản phẩm</a>
 							</div>
 							<div class="col-sm-2">
-								<a class="btn btn-delete btn-sm print-file" type="button"
-									title="In" onclick="myApp.printTable()"><i
-									class="fas fa-print"></i> In dữ liệu</a>
+								<a class="btn btn-delete btn-sm print-file" type="button" title="In"
+									onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
 							</div>
 							<div class="col-sm-2">
-								<a class="btn btn-delete btn-sm print-file js-textareacopybtn"
-									type="button" title="Sao chép"><i class="fas fa-copy"></i>
+								<a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button"
+									title="Sao chép"><i class="fas fa-copy"></i>
 									Sao chép</a>
 							</div>
 
 							<div class="col-sm-2">
-								<a class="btn btn-excel btn-sm" href="" title="In"><i
-									class="fas fa-file-excel"></i> Xuất Excel</a>
+								<a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i>
+									Xuất Excel</a>
 							</div>
 							<div class="col-sm-2">
-								<a class="btn btn-delete btn-sm pdf-file" type="button"
-									title="In" onclick="myFunction(this)"><i
-									class="fas fa-file-pdf"></i> Xuất PDF</a>
+								<a class="btn btn-delete btn-sm pdf-file" type="button" title="In"
+									onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
 							</div>
 						</div>
 						<table class="table table-hover table-bordered" id="sampleTable">
@@ -65,32 +78,40 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!-- <c:forEach var="product" items="${product1}"> -->
-									<tr th:each="product1, loopStatus : ${product1}">
-										<td th:text="${product1.productId}"></td>
-										<td th:text="${product1.productName}"></td>
-										<td th:text="${product1.productDescription}"></td>
-										<td><img class="img-card-person" th:src="@{|../assets/user/images/products/item/${product1.productImages}|}" alt=""></td>
-										<td th:text="${product1.brand != null ? product1.brand.brandName : ''}"></td>
-
-								
-										<td>
-											<span
-												th:text="${#numbers.formatDecimal(product1.productPrice,0,'COMMA',0,'POINT')} + ' VND'"></span>
-										</td>
-										<td th:text="${product1.category != null ? product1.category.categoryName : ''}"></td>
-										<td>
-											<a class="btn btn-primary btn-sm edit" type="button" th:href="@{/product-admin/edit/{productId}(productId=${product1.productId})}">
+								<tr th:each="product1, loopStatus : ${product1}">
+									<td th:text="${product1.productId}"></td>
+									<td th:text="${product1.productName}"></td>
+									<td th:text="${product1.productDescription}"></td>
+									<td><img class="img-card-person"
+											th:src="@{|../assets/user/images/products/item/${product1.productImages}|}"
+											alt=""></td>
+									<td th:text="${product1.brand != null ? product1.brand.brandName : ''}"></td>
+									<td>
+										<span
+											th:text="${#numbers.formatDecimal(product1.productPrice,0,'COMMA',0,'POINT')} + ' VND'"></span>
+									</td>
+									<td th:text="${product1.category != null ? product1.category.categoryName : ''}">
+									</td>
+									<td>
+										<div class="btn-group" role="group">
+											<a class="btn btn-primary btn-sm edit" type="button"
+												th:href="@{/product-admin/edit/{productId}(productId=${product1.productId})}">
 												<i class="fas fa-edit"></i>
 											</a>
-										</td>
-										<td>
-											<a class="btn btn-primary btn-sm list" type="button" th:href="@{/productDetail/form-productDetailId/{productId}(productId=${product1.productId})}">
-												<i class="fas fa-list"></i>
+											<a class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+												th:href="@{/product-admin/delete/{id}(id=${product1.productId})}"
+												onclick="return confirmDeleteUser();">
+												<i class="fas fa-trash-alt"></i>
 											</a>
-										</td>
-									</tr>
-								<!-- </c:forEach> -->
+										</div>
+									</td>
+									<td>
+										<a class="btn btn-primary btn-sm list" type="button"
+											th:href="@{/productDetail/form-productDetailId/{productId}(productId=${product1.productId})}">
+											<i class="fas fa-list"></i>
+										</a>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -104,48 +125,48 @@
 	<div th:replace="admin/layout/script2 :: script2"></div>
 	</script>
 	<script type="text/javascript">
-							$('#sampleTable').DataTable();
-							//Thời Gian
-							function time() {
-								var today = new Date();
-								var weekday = new Array(7);
-								weekday[0] = "Chủ Nhật";
-								weekday[1] = "Thứ Hai";
-								weekday[2] = "Thứ Ba";
-								weekday[3] = "Thứ Tư";
-								weekday[4] = "Thứ Năm";
-								weekday[5] = "Thứ Sáu";
-								weekday[6] = "Thứ Bảy";
-								var day = weekday[today.getDay()];
-								var dd = today.getDate();
-								var mm = today.getMonth() + 1;
-								var yyyy = today.getFullYear();
-								var h = today.getHours();
-								var m = today.getMinutes();
-								var s = today.getSeconds();
-								m = checkTime(m);
-								s = checkTime(s);
-								nowTime = h + " giờ " + m + " phút " + s + " giây";
-								if (dd < 10) {
-									dd = '0' + dd
-								}
-								if (mm < 10) {
-									mm = '0' + mm
-								}
-								today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-								tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-									'</span>';
-								document.getElementById("clock").innerHTML = tmp;
-								clocktime = setTimeout("time()", "1000", "Javascript");
+		$('#sampleTable').DataTable();
+		//Thời Gian
+		function time() {
+			var today = new Date();
+			var weekday = new Array(7);
+			weekday[0] = "Chủ Nhật";
+			weekday[1] = "Thứ Hai";
+			weekday[2] = "Thứ Ba";
+			weekday[3] = "Thứ Tư";
+			weekday[4] = "Thứ Năm";
+			weekday[5] = "Thứ Sáu";
+			weekday[6] = "Thứ Bảy";
+			var day = weekday[today.getDay()];
+			var dd = today.getDate();
+			var mm = today.getMonth() + 1;
+			var yyyy = today.getFullYear();
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+			m = checkTime(m);
+			s = checkTime(s);
+			nowTime = h + " giờ " + m + " phút " + s + " giây";
+			if (dd < 10) {
+				dd = '0' + dd
+			}
+			if (mm < 10) {
+				mm = '0' + mm
+			}
+			today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+			tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+				'</span>';
+			document.getElementById("clock").innerHTML = tmp;
+			clocktime = setTimeout("time()", "1000", "Javascript");
 
-								function checkTime(i) {
-									if (i < 10) {
-										i = "0" + i;
-									}
-									return i;
-								}
-							}
-						</script>
+			function checkTime(i) {
+				if (i < 10) {
+					i = "0" + i;
+				}
+				return i;
+			}
+		}
+	</script>
 </body>
 
 </html>

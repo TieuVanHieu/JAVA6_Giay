@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,13 +54,18 @@ public class AdminCategoryMN {
     }
 
     @RequestMapping("/create")
-    public String create(Model model, @ModelAttribute("category") CategoryEntity categoryEntity){
+    public String create(Model model, @ModelAttribute("category") CategoryEntity categoryEntity, BindingResult result){
+        if (categoryEntity.getCategoryName() == null || categoryEntity.getCategoryName().isEmpty()) {
+            result.rejectValue("categoryName", "error.categoryEntity", "Tên loại giày không được để trống");
+            return "/admin/form-category"; // Return to the form for the user to correct the error
+        }
+    
+        // If categoryName is not empty, proceed with saving the entity
         categoryEntityDAO.save(categoryEntity);
-
-        return "redirect:/category";
-        
-
+    
+        return "/admin/form-category";
     }
+    
     @RequestMapping("/delete/{categoryId}")
     public String delete(@PathVariable("categoryId") Integer categoryId,Model model, RedirectAttributes redirectAttributes) {
         Optional<CategoryEntity> categoryOptional = categoryEntityDAO.findById(categoryId);
@@ -71,7 +77,7 @@ public class AdminCategoryMN {
             if (!categoryEntity.getProduct().isEmpty()) {
                 // Nếu có, không xóa và thông báo lỗi
                 // redirectAttributes.addFlashAttribute("error", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
-                model.addAttribute("messageDanger", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
+                model.addAttribute("messageDanger", "Không thể xóa loại giày này vì có sản phẩm đang liên kết với nó.");
                 return "forward:/brand";
             } else {
                 // Nếu không có sản phẩm liên kết, xóa hãng

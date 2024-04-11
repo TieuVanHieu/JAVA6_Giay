@@ -1,116 +1,127 @@
-          <!DOCTYPE html>
-            <html lang="en" xmlns:th="http://www.thymeleaf.org">
-                <div th:replace="admin/layout/head :: head"></div>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="admin/layout/head :: head"></div>
 
 
-            <body class="app sidebar-mini rtl">
-                <style>
-                    .Choicefile {
-                        display: block;
-                        background: #14142B;
-                        border: 1px solid #fff;
-                        color: #fff;
-                        width: 150px;
-                        text-align: center;
-                        text-decoration: none;
-                        cursor: pointer;
-                        padding: 5px 0px;
-                        border-radius: 5px;
-                        font-weight: 500;
-                        align-items: center;
-                        justify-content: center;
-                    }
+<body class="app sidebar-mini rtl">
+    <style>
+        .Choicefile {
+            display: block;
+            background: #14142B;
+            border: 1px solid #fff;
+            color: #fff;
+            width: 150px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            padding: 5px 0px;
+            border-radius: 5px;
+            font-weight: 500;
+            align-items: center;
+            justify-content: center;
+        }
 
-                    .Choicefile:hover {
-                        text-decoration: none;
-                        color: white;
-                    }
+        .Choicefile:hover {
+            text-decoration: none;
+            color: white;
+        }
 
-                    #uploadfile,
-                    .removeimg {
-                        display: none;
-                    }
+        #uploadfile,
+        .removeimg {
+            display: none;
+        }
 
-                    #thumbbox {
-                        position: relative;
-                        width: 100%;
-                        margin-bottom: 20px;
-                    }
+        #thumbbox {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
 
-                    .removeimg {
-                        height: 25px;
-                        position: absolute;
-                        background-repeat: no-repeat;
-                        top: 5px;
-                        left: 5px;
-                        background-size: 25px;
-                        width: 25px;
-                        /* border: 3px solid red; */
-                        border-radius: 50%;
-                    }
+        .removeimg {
+            height: 25px;
+            position: absolute;
+            background-repeat: no-repeat;
+            top: 5px;
+            left: 5px;
+            background-size: 25px;
+            width: 25px;
+            /* border: 3px solid red; */
+            border-radius: 50%;
+        }
 
-                    .removeimg::before {
-                        -webkit-box-sizing: border-box;
-                        box-sizing: border-box;
-                        content: '';
-                        border: 1px solid red;
-                        background: red;
-                        text-align: center;
-                        display: block;
-                        margin-top: 11px;
-                        transform: rotate(45deg);
-                    }
+        .removeimg::before {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            content: '';
+            border: 1px solid red;
+            background: red;
+            text-align: center;
+            display: block;
+            margin-top: 11px;
+            transform: rotate(45deg);
+        }
 
-                    .removeimg::after {
-                        /* color: #FFF; */
-                        /* background-color: #DC403B; */
-                        content: '';
-                        background: red;
-                        border: 1px solid red;
-                        text-align: center;
-                        display: block;
-                        transform: rotate(-45deg);
-                        margin-top: -2px;
-                    }
-                </style>
-	<!-- Navbar-->
-	<header th:replace="admin/layout/header :: header"></header>
-	<!-- Sidebar menu-->
-	<div th:replace="admin/layout/left-menu :: left-menu"></div>
-	<!-- Sidebar menu-->
-                        <main class="app-content">
-                            <div class="app-title">
-                                <ul class="app-breadcrumb breadcrumb">
-                                    <li class="breadcrumb-item">Danh sách màu</li>
-                                    <li class="breadcrumb-item"><a href="#">Thêm Màu</a></li>
-                                </ul>
-                            </div>
+        .removeimg::after {
+            /* color: #FFF; */
+            /* background-color: #DC403B; */
+            content: '';
+            background: red;
+            border: 1px solid red;
+            text-align: center;
+            display: block;
+            transform: rotate(-45deg);
+            margin-top: -2px;
+        }
+
+        .button-container {
+            display: flex;
+            /* Sử dụng flexbox để căn chỉnh các nút */
+            gap: 10px;
+            /* Tạo khoảng cách 10px giữa các nút */
+        }
+    </style>
+    <!-- Navbar-->
+    <header th:replace="admin/layout/header :: header"></header>
+    <!-- Sidebar menu-->
+    <div th:replace="admin/layout/left-menu :: left-menu"></div>
+    <!-- Sidebar menu-->
+    <main class="app-content">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item">Danh sách màu</li>
+                <li class="breadcrumb-item"><a href="#">Thêm Màu</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <h3 class="tile-title">Tạo Màu</h3>
+                    <div class="tile-body">
+                        <form method="POST" th:action="@{/color/create}" th:object="${color}"
+                            enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="tile">
-                                        <h3 class="tile-title">Tạo Màu</h3>
-                                        <div class="tile-body">
-                                            <form method="POST" th:action="@{/color/create}" th:object="${color}"
-							enctype="multipart/form-data">
-							<div class="row">
-								<div class="form-group  col-md-4">
-									<label class="control-label">ID Màu</label>
-									<input name="colorId" th:field="*{colorId}" class="form-control" readonly="True" />
-								</div>
-								<div class="form-group  col-md-4">
-									<label class="control-label">Tên Màu</label>
-									<input name="colorName" th:field="*{colorName}" class="form-control" />
-								</div>
-							</div>
-							<button class="btn btn-save">Lưu lại</button>
-							<a class="btn btn-cancel" href="/color">Hủy bỏ</a>
-						</form>
-                                        </div>
-                                       
-                                    </div>
-                        </main>
-                        <div th:replace="admin/layout/script2 :: script2"></div>
+                                <div class="form-group  col-md-4">
+                                    <label class="control-label">ID Màu</label>
+                                    <input name="colorId" th:field="*{colorId}" class="form-control" readonly="True" />
+                                </div>
+                                <div class="form-group  col-md-4">
+                                    <label class="control-label">Tên Màu</label>
+                                    <input name="colorName" th:field="*{colorName}" class="form-control" />
+                                    <div th:if="${#fields.hasErrors('colorName')}" th:errors="*{colorName}"></div>
+                                </div>
+                            </div>
+                            <div class="button-container">
+                                <button class="btn btn-actv">Lưu lại</button>
+                                <a class="btn btn-danger" href="/color">Hủy bỏ</a>
+                                <a class="btn btn-warning warning-alert-left-top" href="/color/form-color">Làm mới</a>
+                            </div>
+                        </form>
+                    </div>
 
-            </body>
+                </div>
+    </main>
+    <div th:replace="admin/layout/script2 :: script2"></div>
 
-            </html>
+</body>
+
+</html>

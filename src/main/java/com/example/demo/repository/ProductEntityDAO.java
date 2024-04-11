@@ -43,4 +43,5 @@ public interface ProductEntityDAO extends JpaRepository<ProductEntity, Integer> 
     // List<ProductEntity> findByCategory(CategoryEntity category);
 
     // // user
+    ProductEntity findByProductName(String productName);
 }

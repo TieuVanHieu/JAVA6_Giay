@@ -26,6 +26,7 @@ public class ColorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer colorId;
     @Nationalized
+    
     String colorName;
 
     @JsonIgnore

@@ -6,73 +6,81 @@
 
 <body class="app sidebar-mini rtl">
 	<style>
-.Choicefile {
-	display: block;
-	background: #14142B;
-	border: 1px solid #fff;
-	color: #fff;
-	width: 150px;
-	text-align: center;
-	text-decoration: none;
-	cursor: pointer;
-	padding: 5px 0px;
-	border-radius: 5px;
-	font-weight: 500;
-	align-items: center;
-	justify-content: center;
-}
+		.Choicefile {
+			display: block;
+			background: #14142B;
+			border: 1px solid #fff;
+			color: #fff;
+			width: 150px;
+			text-align: center;
+			text-decoration: none;
+			cursor: pointer;
+			padding: 5px 0px;
+			border-radius: 5px;
+			font-weight: 500;
+			align-items: center;
+			justify-content: center;
+		}
 
-.Choicefile:hover {
-	text-decoration: none;
-	color: white;
-}
+		.Choicefile:hover {
+			text-decoration: none;
+			color: white;
+		}
 
-#uploadfile, .removeimg {
-	display: none;
-}
+		#uploadfile,
+		.removeimg {
+			display: none;
+		}
 
-#thumbbox {
-	position: relative;
-	width: 100%;
-	margin-bottom: 20px;
-}
+		#thumbbox {
+			position: relative;
+			width: 100%;
+			margin-bottom: 20px;
+		}
 
-.removeimg {
-	height: 25px;
-	position: absolute;
-	background-repeat: no-repeat;
-	top: 5px;
-	left: 5px;
-	background-size: 25px;
-	width: 25px;
-	/* border: 3px solid red; */
-	border-radius: 50%;
-}
+		.removeimg {
+			height: 25px;
+			position: absolute;
+			background-repeat: no-repeat;
+			top: 5px;
+			left: 5px;
+			background-size: 25px;
+			width: 25px;
+			/* border: 3px solid red; */
+			border-radius: 50%;
+		}
 
-.removeimg::before {
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	content: '';
-	border: 1px solid red;
-	background: red;
-	text-align: center;
-	display: block;
-	margin-top: 11px;
-	transform: rotate(45deg);
-}
+		.removeimg::before {
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			content: '';
+			border: 1px solid red;
+			background: red;
+			text-align: center;
+			display: block;
+			margin-top: 11px;
+			transform: rotate(45deg);
+		}
 
-.removeimg::after {
-	/* color: #FFF; */
-	/* background-color: #DC403B; */
-	content: '';
-	background: red;
-	border: 1px solid red;
-	text-align: center;
-	display: block;
-	transform: rotate(-45deg);
-	margin-top: -2px;
-}
-</style>
+		.removeimg::after {
+			/* color: #FFF; */
+			/* background-color: #DC403B; */
+			content: '';
+			background: red;
+			border: 1px solid red;
+			text-align: center;
+			display: block;
+			transform: rotate(-45deg);
+			margin-top: -2px;
+		}
+
+		.button-container {
+			display: flex;
+			/* Sử dụng flexbox để căn chỉnh các nút */
+			gap: 10px;
+			/* Tạo khoảng cách 10px giữa các nút */
+		}
+	</style>
 	<!-- Navbar-->
 	<header th:replace="admin/layout/header :: header"></header>
 	<!-- Sidebar menu-->
@@ -93,57 +101,80 @@
 					<div class="tile-body">
 						<div class="row element-button">
 							<div class="col-sm-2">
-								<a class="btn btn-add btn-sm" data-toggle="modal"
-									data-target="#adddanhmuc"><i class="fas fa-folder-plus"></i>
+								<a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
+										class="fas fa-folder-plus"></i>
 									Thêm danh mục</a>
 							</div>
 						</div>
 					</div>
-					<form class="row" method="POST" th:action="@{/product-admin/create}" th:object="${product}" enctype="multipart/form-data">
+					<form class="row" method="POST" th:action="@{/product-admin/create}" th:object="${product}"
+						enctype="multipart/form-data">
 						<div class="form-group col-md-4">
 							<label class="control-label" for="productId">Mã sản phẩm</label>
-							<input id="productId" name="productId" th:field="*{productId}" class="form-control" readonly="readonly" />
+							<input id="productId" name="productId" th:field="*{productId}" class="form-control"
+								readonly="readonly" />
 						</div>
-					
+
 						<div class="form-group col-md-4">
 							<label class="control-label" for="productName">Tên sản phẩm</label>
 							<input id="productName" name="productName" th:field="*{productName}" class="form-control" />
+							<div th:if="${#fields.hasErrors('productName')}">
+								<p th:errors="*{productName}"></p>
+							</div>
 						</div>
-					
+
 						<div class="form-group col-md-4">
 							<label class="control-label" for="category">Loại Giày</label>
-							<select id="category" th:field="*{category.categoryId}" name="category.categoryId" class="form-control">
-								<option th:each="categorys : ${categoryIds}" th:value="${categorys.categoryId}" th:text="${categorys.categoryName}"></option>
+							<select id="category" th:field="*{category.categoryId}" name="category.categoryId"
+								class="form-control">
+								<option th:each="categorys : ${categoryIds}" th:value="${categorys.categoryId}"
+									th:text="${categorys.categoryName}"></option>
 							</select>
 						</div>
-					
+
 						<div class="form-group col-md-4">
 							<label class="control-label" for="productPrice">Giá bán</label>
-							<input id="productPrice" name="productPrice" th:field="*{productPrice}" class="form-control" type="number" />
+							<input id="productPrice" name="productPrice" th:field="*{productPrice}" class="form-control"
+								type="number" />
+							<div th:if="${#fields.hasErrors('productPrice')}">
+								<p th:errors="*{productPrice}"></p>
+							</div>
 						</div>
-					
+
 						<div class="form-group col-md-4">
 							<label class="control-label" for="brand">Hãng</label>
 							<select id="brand" th:field="*{brand.brandId}" name="brand.brandId" class="form-control">
-								<option th:each="brands : ${brandIds}" th:value="${brands.brandId}" th:text="${brands.brandName}"></option>
+								<option th:each="brands : ${brandIds}" th:value="${brands.brandId}"
+									th:text="${brands.brandName}"></option>
 							</select>
 						</div>
-					
+						<!-- <div class="form-group col-md-6">
+							<label for="image" class="form-label">Hình ảnh</label>
+							<br>
+							<img alt="" th:src="@{|/user/images/productImage/*{image}|}" id="image"
+								width="300" height="300" style="margin: 10px">
+							<input name="avatar" type="file" id="imageFile" accept="image/*"  onchange="chooseFile(this)"/>
+
+						</div> -->
 						<div class="form-group col-md-4">
 							<label class="control-label">Ảnh sản phẩm</label>
 							<input name="picture" type="file" class="form-control" />
 						</div>
-					
+
 						<div class="form-group col-md-12">
 							<label class="control-label" for="productDescription">Mô tả sản phẩm</label>
-							<textarea id="productDescription" name="productDescription" class="form-control" th:field="*{productDescription}" rows="5"></textarea>
+							<textarea id="productDescription" name="productDescription" class="form-control"
+								th:field="*{productDescription}" rows="5"></textarea>
 						</div>
-					
 						<div class="form-group col-md-12">
-							<button class="btn btn-save" type="submit">Lưu lại</button>
-							<a class="btn btn-cancel" href="/product">Hủy bỏ</a>
+							<div class="button-container">
+								<button class="btn btn-actv">Lưu lại</button>
+								<a class="btn btn-danger" href="/product-admin">Hủy bỏ</a>
+								<a class="btn btn-warning warning-alert-left-top" href="/product-admin/form-product">Làm
+									mới</a>
+							</div>
 						</div>
-					
+
 						<h1 th:text="${message}"></h1>
 					</form>
 				</div>
@@ -156,15 +187,13 @@
 	<!--
   MODAL DANH MỤC
 -->
-	<div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalCenterTitle" data-backdrop="static"
-		data-keyboard="false">
+	<div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 
 				<div class="modal-body">
-					<form action="/product/addCategory" modelAttribute="category"
-						method="post">
+					<form action="/product/addCategory" modelAttribute="category" method="post">
 						<div class="row">
 							<div class="form-group  col-md-12">
 								<span class="thong-tin-thanh-toan">
@@ -172,8 +201,8 @@
 								</span>
 							</div>
 							<div class="form-group col-md-12">
-								<label class="control-label">Nhập tên loại giày mới</label> <input
-									name="category_name" class="form-control" required />
+								<label class="control-label">Nhập tên loại giày mới</label> <input name="category_name"
+									class="form-control" required />
 							</div>
 							<div class="form-group col-md-12">
 								<label class="control-label">Loại giày hiện đang có</label>
@@ -205,29 +234,29 @@ MODAL
 
 
 
-<div th:replace="admin/layout/script2 :: script2"></div>
+	<div th:replace="admin/layout/script2 :: script2"></div>
 	</script>
 	<script>
-							const inpFile = document.getElementById("inpFile");
-							const loadFile = document.getElementById("loadFile");
-							const previewContainer = document.getElementById("imagePreview");
-							const previewImage = previewContainer
-								.querySelector(".image-preview__image");
-							const previewDefaultText = previewContainer
-								.querySelector(".image-preview__default-text");
-							inpFile.addEventListener("change", function () {
-								const file = this.files[0];
-								if (file) {
-									const reader = new FileReader();
-									previewDefaultText.style.display = "none";
-									previewImage.style.display = "block";
-									reader.addEventListener("load", function () {
-										previewImage.setAttribute("src", this.result);
-									});
-									reader.readAsDataURL(file);
-								}
-							});
-						</script>
+		const inpFile = document.getElementById("inpFile");
+		const loadFile = document.getElementById("loadFile");
+		const previewContainer = document.getElementById("imagePreview");
+		const previewImage = previewContainer
+			.querySelector(".image-preview__image");
+		const previewDefaultText = previewContainer
+			.querySelector(".image-preview__default-text");
+		inpFile.addEventListener("change", function () {
+			const file = this.files[0];
+			if (file) {
+				const reader = new FileReader();
+				previewDefaultText.style.display = "none";
+				previewImage.style.display = "block";
+				reader.addEventListener("load", function () {
+					previewImage.setAttribute("src", this.result);
+				});
+				reader.readAsDataURL(file);
+			}
+		});
+	</script>
 </body>
 
 </html>

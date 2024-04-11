@@ -3,6 +3,7 @@ package com.example.demo.controller.admin;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale.Category;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.BrandEntity;
 import com.example.demo.model.CategoryEntity;
@@ -88,21 +90,49 @@ public class AdminProductMN {
         return "/admin/form-product";
     }
 
-    @RequestMapping("/create")
-    public String create(Model model, @Validated @ModelAttribute("product") ProductEntity productEntity,
-            BindingResult error,
-            @RequestParam("picture") MultipartFile multipartFile) throws IllegalStateException, IOException {
-        try {
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            String uploadDir = "/images";
-            productEntity.setProductImages(fileName);
-            productEntityDAO.save(productEntity);
-            paramService.save(multipartFile, uploadDir);
-            model.addAttribute("product", new ProductEntity());
-        } catch (Exception e) {
-        }
-        return "redirect:/product-admin";
+@RequestMapping("/create")
+public String create(Model model, @Validated @ModelAttribute("product") ProductEntity productEntity,
+        BindingResult result,
+        @RequestParam("picture") MultipartFile multipartFile) throws IllegalStateException, IOException {
+    if (result.hasErrors()) {
+        // If there are validation errors, return to the product creation page with error messages
+        return "/admin/form-product";
     }
+
+    try {
+        // Check if the product name is empty
+        if (productEntity.getProductName() == null || productEntity.getProductName().isEmpty()) {
+            // If the product name is empty, add an error to the BindingResult
+            result.rejectValue("productName", "NotEmpty.productEntity.productName", "Tên sản phẩm không được bỏ trống");
+            // Return to the product creation page with the error message
+            return "/admin/form-product";
+        }
+        
+        // Check if the product price is empty
+        if (productEntity.getProductPrice() == null) {
+            // If the product price is empty, add an error to the BindingResult
+            result.rejectValue("productPrice", "NotEmpty.productEntity.productPrice", "Giá sản phẩm không được bỏ trống");
+            // Return to the product creation page with the error message
+            return "/admin/form-product";
+        }
+         // Check for Duplicate Color Name
+         ProductEntity existingProduct = productEntityDAO.findByProductName(productEntity.getProductName());
+         if (existingProduct != null) {
+             result.rejectValue("productName", "error.productEntity", "Tên màu sản phẩm tồn tại, vui lòng chọn tên khác");
+             return "/admin/form-product"; // Trả về trang form để người dùng sửa lỗi
+         }
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String uploadDir = "/images";
+        productEntity.setProductImages(fileName);
+        productEntityDAO.save(productEntity);
+        paramService.save(multipartFile, uploadDir);
+        model.addAttribute("product", new ProductEntity());
+    } catch (Exception e) {
+        // Handle exceptions if needed
+    }
+    return "redirect:/product-admin";
+}
 
     @ModelAttribute("categoryIds")
     public List<CategoryEntity> getAllCategoryIds() {
@@ -122,20 +152,44 @@ public class AdminProductMN {
     public String addCate(@ModelAttribute("category") CategoryEntity categoryEntity) {
         categoryEntityDAO.save(categoryEntity);
         
-        return "redirect:/product/form-product";
+        return "redirect:/product-admin/form-product";
     }
     
     @PostMapping("/addBrand")
     public String addBrand(@ModelAttribute("brand") BrandEntity brandEntity) {
         brandEntityDAO.save(brandEntity);
         
-        return "redirect:/product/form-product";
+        return "redirect:/product-admin/form-product";
     }
     
 
-    @RequestMapping("/delete/{productId}")
-	public String delete(@PathVariable("productId") Integer productId) {
-		productEntityDAO.deleteById(productId);
-		return "redirect:/admin/product-management";
-	}
+  
+
+@RequestMapping("/delete/{productId}")
+    public String delete(@PathVariable("productId") Integer productId,Model model, RedirectAttributes redirectAttributes) {
+        Optional<ProductEntity> productOptional = productEntityDAO.findById(productId);
+        
+        if (productOptional.isPresent()) {
+            ProductEntity productEntity = productOptional.get();
+            
+            // Kiểm tra xem có sản phẩm nào liên kết với hãng không
+            if (!productEntity.getProductDetail().isEmpty()) {
+                // Nếu có, không xóa và thông báo lỗi
+                // redirectAttributes.addFlashAttribute("error", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
+                model.addAttribute("messageDanger", "Không thể xóa sản phẩm này vì có sản phẩm chi tiết đang liên kết với nó.");
+                return "forward:/product-admin";
+            } else {
+                // Nếu không có sản phẩm liên kết, xóa hãng
+                productEntityDAO.deleteById(productId);
+                model.addAttribute("messageSuccess", "Xóa thành công !");
+                return "forward:/product-admin";
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Không tìm thấy sản phẩm");
+        }
+        
+        return "redirect:/product-admin";
+    }
+
+
 }

@@ -8,5 +8,5 @@ import com.example.demo.model.ColorEntity;
  * ColorEntityDAO
  */
 public interface ColorEntityDAO extends JpaRepository<ColorEntity, Integer> {
-
+    ColorEntity findByColorName(String colorName);
 }

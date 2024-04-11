@@ -11,8 +11,8 @@
 	<main class="app-content">
 		<div class="app-title">
 			<ul class="app-breadcrumb breadcrumb side">
-				<li class="breadcrumb-item active"><a href="#"><b>Danh
-							sách màu</b></a></li>
+				<li class="breadcrumb-item active"><a href="/color"><b>Danh
+							sách màu sắc</b></a></li>
 			</ul>
 			<div id="clock"></div>
 		</div>
@@ -70,6 +70,7 @@
 								<tr>
 									<th>ID màu</th>
 									<th>Tên màu</th>
+									<th>Chức năng</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -78,12 +79,13 @@
 										<td th:text="${color.colorId}"></td>
 										<td th:text="${color.colorName}"></td>
 										<td>
-											<a class="btn btn-primary btn-sm trash" type="button"
-											title="Xóa" th:href="@{/color/delete/{id}(id=${color.colorId})}" onclick="return confirmDeleteUser();"><i
-												class="fas fa-trash-alt"></i> </a>
+											
 											<a class="btn btn-primary btn-sm edit" type="button"
 											th:href="@{/color/edit/{id}(id=${color.colorId})}"><i
 												class="fas fa-edit"></i>
+												<a class="btn btn-primary btn-sm trash" type="button"
+											title="Xóa" th:href="@{/color/delete/{id}(id=${color.colorId})}" onclick="return confirmDeleteUser();"><i
+												class="fas fa-trash-alt"></i> </a>
 												
 										</a>
 									</td>

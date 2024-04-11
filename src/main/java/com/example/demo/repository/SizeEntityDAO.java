@@ -8,5 +8,5 @@ import com.example.demo.model.SizeEntity;
  * SizeEntityDAO
  */
 public interface SizeEntityDAO extends JpaRepository<SizeEntity, Integer> {
-
+    SizeEntity findBySizeName(String sizeName);
 }

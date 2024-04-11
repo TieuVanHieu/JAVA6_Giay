@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,10 +46,27 @@ public class AdminSizeMN {
     }
 
     @RequestMapping("/create")
-    public String create(Model model, @ModelAttribute("size") SizeEntity sizeEntity){
+    public String create(Model model, @ModelAttribute("size") SizeEntity sizeEntity, BindingResult result) {
+        if (sizeEntity.getSizeName() == null || sizeEntity.getSizeName().isEmpty()) {
+            result.rejectValue("sizeName", "error.sizeEntity", "Tên kích cỡ không được để trống");
+            return "/admin/form-size"; // Return to the form page for the user to correct the error
+        } else if (!sizeEntity.getSizeName().matches("^\\d+$")) {
+            result.rejectValue("sizeName", "error.sizeEntity", "Tên kích cỡ phải là số");
+            return "/admin/form-size"; // Return to the form page for the user to correct the error
+        }
+        
+           // Check for Duplicate Color Name
+           SizeEntity existingSize = sizeEntityDAO.findBySizeName(sizeEntity.getSizeName());
+           if (existingSize != null) {
+               result.rejectValue("sizeName", "error.sizeEntity", "Tên màu kích cỡ tồn tại, vui lòng chọn tên khác");
+               return "/admin/form-size"; // Trả về trang form để người dùng sửa lỗi
+           }
+        // If sizeName is not empty and contains only numbers, proceed to save the entity
         sizeEntityDAO.save(sizeEntity);
+    
         return "redirect:/size";
     }
+    
 
     @RequestMapping("/delete/{sizeId}")
     public String delete(@PathVariable("sizeId") Integer sizeId,Model model, RedirectAttributes redirectAttributes) {

@@ -29,6 +29,7 @@ public class ProductEntity {
     Integer productId;
     @Nationalized
     String productName;
+    
     Double productPrice;
     @Nationalized
     String productDescription;

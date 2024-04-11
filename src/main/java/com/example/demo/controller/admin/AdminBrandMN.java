@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,12 +53,21 @@ public class AdminBrandMN {
     }
 
     @RequestMapping("/create")
-    public String create(Model model, @ModelAttribute("brand") BrandEntity brandEntity){
-        brandEntityDAO.save(brandEntity);
-
-        return "redirect:/brand";
-
+public String create(Model model, @ModelAttribute("brand") BrandEntity brandEntity, BindingResult result){
+    if (brandEntity.getBrandName() == null || brandEntity.getBrandName().isEmpty()) {
+        result.rejectValue("brandName", "error.brandEntity", "Tên thương hiệu không được để trống");
+        return "/admin/form-brand"; // Return back to the form for user to correct the error
+    }else if (!brandEntity.getBrandName().matches("^[a-zA-Z]+$")) {
+        result.rejectValue("brandName", "error.brandEntity", "Tên hãng phải chứa các ký tự chữ cái");
+        return "/admin/form-brand"; // Trả về trang form để người dùng sửa lỗi
     }
+
+    // If brandName is not empty, proceed with saving the entity
+    brandEntityDAO.save(brandEntity);
+
+    return "redirect:/brand";
+}
+    
 
     @RequestMapping("/delete/{brandId}")
     public String delete(@PathVariable("brandId") Integer brandId,Model model, RedirectAttributes redirectAttributes) {
