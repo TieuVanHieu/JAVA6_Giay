@@ -63,6 +63,7 @@ public class AdminColorMN {
             result.rejectValue("colorName", "error.colorEntity", "Tên màu đã tồn tại, vui lòng chọn tên khác");
             return "/admin/form-color"; // Trả về trang form để người dùng sửa lỗi
         }
+        
     
         // Nếu không có lỗi (tên màu không trùng) tiến hành lưu entity
         colorEntityDAO.save(colorEntity);
