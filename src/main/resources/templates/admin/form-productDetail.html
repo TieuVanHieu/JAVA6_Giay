@@ -100,7 +100,7 @@
 							</div>
 						</div>
 						<div class="form-group col-md-4">
-							<label class="control-label" for="product">Tên sản phẩm</label>
+							<label class="control-label" for="product">Tên sản phẩm</label>							
 							<select id="product" th:field="*{product.productId}" name="product.productName"
 								class="form-control">
 								<option th:each="product : ${productIds}" th:value="${product.productId}"
