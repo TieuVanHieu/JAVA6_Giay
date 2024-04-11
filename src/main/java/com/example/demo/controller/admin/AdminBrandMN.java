@@ -58,7 +58,7 @@ public String create(Model model, @ModelAttribute("brand") BrandEntity brandEnti
         result.rejectValue("brandName", "error.brandEntity", "Tên thương hiệu không được để trống");
         return "/admin/form-brand"; // Return back to the form for user to correct the error
     }else if (!brandEntity.getBrandName().matches("^[a-zA-Z]+$")) {
-        result.rejectValue("brandName", "error.brandEntity", "Tên hãng phải chứa các ký tự chữ cái");
+        result.rejectValue("brandName", "error.brandEntity", "Tên thương hiệu phải chứa các ký tự chữ cái");
         return "/admin/form-brand"; // Trả về trang form để người dùng sửa lỗi
     }
 
@@ -76,20 +76,20 @@ public String create(Model model, @ModelAttribute("brand") BrandEntity brandEnti
         if (brandOptional.isPresent()) {
             BrandEntity brandEntity = brandOptional.get();
             
-            // Kiểm tra xem có sản phẩm nào liên kết với hãng không
+            // Kiểm tra xem có sản phẩm nào liên kết với thương hiệu không
             if (!brandEntity.getProduct().isEmpty()) {
                 // Nếu có, không xóa và thông báo lỗi
-                // redirectAttributes.addFlashAttribute("error", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
-                model.addAttribute("messageDanger", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
+                // redirectAttributes.addFlashAttribute("error", "Không thể xóa thương hiệu này vì có sản phẩm đang liên kết với nó.");
+                model.addAttribute("messageDanger", "Không thể xóa thương hiệu này vì có sản phẩm đang liên kết với nó.");
                 return "forward:/brand";
             } else {
-                // Nếu không có sản phẩm liên kết, xóa hãng
+                // Nếu không có sản phẩm liên kết, xóa thương hiệu
                 brandEntityDAO.deleteById(brandId);
                 model.addAttribute("messageSuccess", "Xóa thành công !");
                 return "forward:/brand";
             }
         } else {
-            redirectAttributes.addFlashAttribute("error", "Không tìm thấy hãng.");
+            redirectAttributes.addFlashAttribute("error", "Không tìm thấy thương hiệu.");
         }
         
         return "redirect:/brand";

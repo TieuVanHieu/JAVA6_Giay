@@ -58,7 +58,7 @@ public class AdminSizeMN {
            // Check for Duplicate Color Name
            SizeEntity existingSize = sizeEntityDAO.findBySizeName(sizeEntity.getSizeName());
            if (existingSize != null) {
-               result.rejectValue("sizeName", "error.sizeEntity", "Tên màu kích cỡ tồn tại, vui lòng chọn tên khác");
+               result.rejectValue("sizeName", "error.sizeEntity", "Tên kích cỡ tồn tại, vui lòng chọn tên khác");
                return "/admin/form-size"; // Trả về trang form để người dùng sửa lỗi
            }
         // If sizeName is not empty and contains only numbers, proceed to save the entity

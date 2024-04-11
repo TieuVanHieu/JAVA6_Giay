@@ -73,20 +73,20 @@ public class AdminCategoryMN {
         if (categoryOptional.isPresent()) {
             CategoryEntity categoryEntity = categoryOptional.get();
             
-            // Kiểm tra xem có sản phẩm nào liên kết với hãng không
+            // Kiểm tra xem có sản phẩm nào liên kết với loại giày không
             if (!categoryEntity.getProduct().isEmpty()) {
                 // Nếu có, không xóa và thông báo lỗi
-                // redirectAttributes.addFlashAttribute("error", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
+                // redirectAttributes.addFlashAttribute("error", "Không thể xóa loại giày này vì có sản phẩm đang liên kết với nó.");
                 model.addAttribute("messageDanger", "Không thể xóa loại giày này vì có sản phẩm đang liên kết với nó.");
                 return "forward:/brand";
             } else {
-                // Nếu không có sản phẩm liên kết, xóa hãng
+                // Nếu không có sản phẩm liên kết, xóa loại giày
                 categoryEntityDAO.deleteById(categoryId);
                 model.addAttribute("messageSuccess", "Xóa thành công !");
                 return "forward:/brand";
             }
         } else {
-            redirectAttributes.addFlashAttribute("error", "Không tìm thấy hãng.");
+            redirectAttributes.addFlashAttribute("error", "Không tìm thấy loại giày.");
         }
         
         return "redirect:/brand";

@@ -77,20 +77,20 @@ public class AdminColorMN {
         if (colorOptional.isPresent()) {
             ColorEntity colorEntity = colorOptional.get();
             
-            // Kiểm tra xem có sản phẩm nào liên kết với hãng không
+            // Kiểm tra xem có sản phẩm nào liên kết với màu không
             if (!colorEntity.getProductDetail().isEmpty()) {
                 // Nếu có, không xóa và thông báo lỗi
-                // redirectAttributes.addFlashAttribute("error", "Không thể xóa hãng này vì có sản phẩm đang liên kết với nó.");
+                // redirectAttributes.addFlashAttribute("error", "Không thể xóa màu này vì có sản phẩm đang liên kết với nó.");
                 model.addAttribute("messageDanger", "Không thể xóa màu này vì có sản phẩm đang liên kết với nó.");
                 return "forward:/brand";
             } else {
-                // Nếu không có sản phẩm liên kết, xóa hãng
+                // Nếu không có sản phẩm liên kết, xóa màu
                 colorEntityDAO.deleteById(colorId);
                 model.addAttribute("messageSuccess", "Xóa thành công !");
                 return "forward:/brand";
             }
         } else {
-            redirectAttributes.addFlashAttribute("error", "Không tìm thấy hãng.");
+            redirectAttributes.addFlashAttribute("error", "Không tìm thấy màu.");
         }
         
         return "redirect:/brand";

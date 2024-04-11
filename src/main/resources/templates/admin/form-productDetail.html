@@ -93,22 +93,20 @@
 					<h3 class="tile-title">Tạo mới chi tiết sản phẩm</h3>
 					<form class="row" method="POST" th:action="@{/productDetail/create}" th:object="${productDetail}" enctype="multipart/form-data">
 						 <div class="form-group col-md-4">
-							<label class="control-label">Mã sản phẩm</label>
+							<label class="control-label">Mã sản phẩm chi tiết</label>
 							<input name="productDetailId" th:field="*{productDetailId}"   class="form-control" readonly="True" />
+							<div th:if="${#fields.hasErrors('productDetailId')}">
+								<p th:errors="*{productDetailId}"></p>
+							</div>
 						</div>
-
 						<div class="form-group col-md-4">
-							<label class="control-label">Tên sản phẩm</label>
-							<input name="product.productName" th:field="*{product.productName}" class="form-control" />
+							<label class="control-label" for="product">Tên sản phẩm</label>
+							<select id="product" th:field="*{product.productId}" name="product.productName"
+								class="form-control">
+								<option th:each="product : ${productIds}" th:value="${product.productId}"
+									th:text="${product.productName}"></option>
+							</select>
 						</div>
-
-
-						<!-- <div class="form-group col-md-4">
-							<label class="control-label">Kích cỡ</label>
-							<form:select path="size.sizeName" class="form-control">
-								<form:options items="${SizeIds}" />
-							</form:select>
-						</div> -->
 							<div class="form-group col-md-4">
 							<label class="control-label" for="size">Kích cỡ</label>
 							<select id="size" th:field="*{size.sizeId}" name="size.sizeId"
@@ -121,6 +119,9 @@
 						<div class="form-group col-md-4">
 							<label class="control-label">Số Lượng</label>
 							<input class="form-control" type="number" th:field="*{quantity}" />
+							<div th:if="${#fields.hasErrors('quantity')}">
+								<p th:errors="*{quantity}"></p>
+							</div>
 						</div>
 						<div class="form-group col-md-4">
 							<label class="control-label" for="color">Màu sắc</label>

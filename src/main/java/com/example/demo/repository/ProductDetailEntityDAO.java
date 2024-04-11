@@ -18,4 +18,5 @@ public interface ProductDetailEntityDAO extends JpaRepository<ProductDetailEntit
             Integer productId);
     // // user
 
+
 }

@@ -115,13 +115,12 @@ public String create(Model model, @Validated @ModelAttribute("product") ProductE
             // Return to the product creation page with the error message
             return "/admin/form-product";
         }
-         // Check for Duplicate Color Name
-         ProductEntity existingProduct = productEntityDAO.findByProductName(productEntity.getProductName());
-         if (existingProduct != null) {
-             result.rejectValue("productName", "error.productEntity", "Tên màu sản phẩm tồn tại, vui lòng chọn tên khác");
-             return "/admin/form-product"; // Trả về trang form để người dùng sửa lỗi
-         }
-
+        if (productEntity.getProductPrice() <= 999) {
+            // If the product price is empty, add an error to the BindingResult
+            result.rejectValue("productPrice", "NotEmpty.productEntity.productPrice", "Giá sản phẩm phải từ 1000 VNĐ");
+            // Return to the product creation page with the error message
+            return "/admin/form-product";
+        }
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = "/images";
         productEntity.setProductImages(fileName);
