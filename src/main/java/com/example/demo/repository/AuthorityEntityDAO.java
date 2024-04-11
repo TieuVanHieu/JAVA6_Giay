@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.model.AuthorityEntity;
@@ -9,5 +11,4 @@ import com.example.demo.model.AuthorityEntity;
  */
 public interface AuthorityEntityDAO extends JpaRepository<AuthorityEntity,Integer>{
 
-    
 }
